@@ -44,10 +44,10 @@ def main():
     data_new = new(data, COL_REGION_CONFIRMED + COL_REGION_DEATHS + ['obitos'])
 
     plot_confirmed(data_new)
-    plt.savefig('novos_casos.png')
+    plt.savefig('portugal_new_cases.png')
 
     plot_deaths(data_new)
-    plt.savefig('novos_obitos.png')
+    plt.savefig('portugal_new_deceased.png')
 
     #plot_combined(data_new)
     #plt.savefig('combinado.png')

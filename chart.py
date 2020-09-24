@@ -47,10 +47,10 @@ def main():
     plt.savefig('novos_casos.png')
 
     plot_deaths(data_new)
-    plt.savefig('obitos.png')
+    plt.savefig('novos_obitos.png')
 
-    plot_combined(data_new)
-    plt.savefig('combinado.png')
+    #plot_combined(data_new)
+    #plt.savefig('combinado.png')
 
 
 def plot_confirmed(data):

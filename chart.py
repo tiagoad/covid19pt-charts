@@ -4,6 +4,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.dates import FR, MO, SA, SU, TH, TU, WE
 from pylab import rcParams
+import os
 
 DATA_FILE = 'data/data.csv'
 META_FILE = 'data/regions.txt'
@@ -40,77 +41,138 @@ HEIGHT = 675
 
 
 def main():
+    os.makedirs('output', exist_ok=True)
+
+    print('Loading data')
     data = load_data()
+    print('Processing new cases')
     data_new = new(data, COL_REGION_CONFIRMED + COL_REGION_DEATHS + ['obitos'])
 
+    print('Plotting charts')
     plot_confirmed(data_new)
-    plt.savefig('portugal_new_cases.png')
+    plt.savefig('output/newcases.png')
+
+    plot_confirmed(data_new, -90)
+    plt.savefig('output/newcases_90d.png')
 
     plot_deaths(data_new)
-    plt.savefig('portugal_new_deceased.png')
+    plt.savefig('output/newdeaths.png')
+
+    plot_deaths(data_new, -90)
+    plt.savefig('output/newdeaths_90d.png')
 
     #plot_combined(data_new)
     #plt.savefig('combinado.png')
 
 
-def plot_confirmed(data):
+def plot_confirmed(data, first_row=0):
     x = data[COL_DATE]
 
     fig, ax = plot_init()
 
-    for col, label in REGION_COLUMNS.items():
-        plt.plot(
-            x,
-            data['confirmados_' + col]
-                .div(REGION_POP[col])
-                .mul(100000)
-                .rolling(7)
-                .mean(),
-            label=label)
+    last_date = data[COL_DATE].iloc[-1]
 
-    plt.plot(
-        x,
-        data[COL_TOTAL]
+    for col, label in REGION_COLUMNS.items():
+        key = 'confirmados_' + col
+
+        y = (data[key]
+            .div(REGION_POP[col])
+            .mul(100000)
+            .rolling(7)
+            .mean())
+
+        p = plt.plot(
+            x[first_row:],
+            y[first_row:],
+            label=label,
+            marker='o',
+            markersize=1.5)
+
+        plt.axhline(
+            y=y.iloc[-1],
+            color=p[0].get_color(),
+            linestyle='solid',
+            linewidth=1,
+            alpha=0.7)
+
+    y = (data[COL_TOTAL]
             .div(TOTAL_POP)
             .mul(100000)
             .rolling(7)
-            .mean(),
+            .mean())
+
+    # whole country
+
+    p = plt.plot(
+        x[first_row:],
+        y[first_row:],
         label='País',
-        color='#000000')
+        color='#000000',
+        marker='o',
+        markersize=1.5)
+
+    plt.axhline(
+        y=y.iloc[-1],
+        color='#000000',
+        linestyle='solid',
+        linewidth=1,
+        alpha=1)
 
     plt.legend(loc='upper left')
 
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Novos casos / 100.000 habitantes | Média móvel de 7 dias | '
-    title += data[COL_DATE].iloc[-1].strftime('%Y-%m-%d')
+    title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
     plot_footer()
 
 
-def plot_deaths(data):
+def plot_deaths(data, first_row=0):
     x = data[COL_DATE]
 
     fig, ax = plot_init()
 
     for col, label in REGION_COLUMNS.items():
-        plt.plot(
-            x,
-            data['obitos_' + col]
+        y = (data['obitos_' + col]
                 .div(REGION_POP[col])
                 .mul(100000)
                 .rolling(7)
-                .mean(),
-            label=label)
+                .mean())
 
-    plt.plot(
-        x,
-        data['obitos']
+        p = plt.plot(
+            x[first_row:],
+            y[first_row:],
+            label=label,
+            marker='o',
+            markersize=1.5)
+
+        plt.axhline(
+            y=y.iloc[-1],
+            color=p[0].get_color(),
+            linestyle='solid',
+            linewidth=1,
+            alpha=0.7)
+
+    y = (data['obitos']
             .div(TOTAL_POP)
             .mul(100000)
             .rolling(7)
-            .mean(),
+            .mean())
+
+    p = plt.plot(
+        x[first_row:],
+        y[first_row:],
         label='País',
-        color='#000000')
+        color='#000000',
+        marker='o',
+        markersize=1.5)
+
+    plt.axhline(
+        y=y.iloc[-1],
+        color='#000000',
+        linestyle='solid',
+        linewidth=1,
+        alpha=1)
 
     plt.legend(loc='upper left')
 
@@ -156,7 +218,7 @@ def plot_combined(data):
 def plot_init():
     plt.clf()
     plt.style.use('default')
-    rcParams["font.family"] = "Helvetica"
+    rcParams["font.family"] = "Cantarell"
     rcParams['axes.xmargin'] = .02
     rcParams['axes.ymargin'] = .02
     rcParams['axes.titlesize'] = 'medium'
@@ -170,13 +232,13 @@ def plot_init():
     ax.xaxis.set_major_formatter(week_fmt)
     ax.xaxis.set_minor_locator(days)
     plt.xticks(rotation=45, fontsize=8)
-    ax.grid(axis='both', color='#EEEEEE')
+    ax.grid(axis='both', color='#F0F0F0')
     ax.set_xlabel('semana (segunda-feira)')
     return fig, ax
 
 
 def plot_footer():
-    plt.figtext(0.985, 0.915, 'Fonte: DGS via gh.com/dssg-pt/covid19pt-data', horizontalalignment='right', verticalalignment='center', color='#BBBBBB')
+    plt.figtext(0.985, 0.023, 'Fonte: DGS via gh.com/dssg-pt/covid19pt-data', horizontalalignment='right', verticalalignment='center', color='#BBBBBB')
 
 #####
 

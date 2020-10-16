@@ -46,7 +46,7 @@ def main():
     print('Loading data')
     data = load_data()
     print('Processing new cases')
-    data_new = new(data, COL_REGION_CONFIRMED + COL_REGION_DEATHS + ['obitos'])
+    data_new = new(data, COL_REGION_CONFIRMED + COL_REGION_DEATHS + ['obitos', 'n_confirmados', 'recuperados', 'internados', 'internados_uci'])
 
     print('Plotting charts')
     plot_confirmed(data_new)
@@ -61,8 +61,8 @@ def main():
     plot_deaths(data_new, -90)
     plt.savefig('output/newdeaths_90d.png')
 
-    #plot_combined(data_new)
-    #plt.savefig('combinado.png')
+    plot_global(data_new)
+    plt.savefig('output/national.png')
 
 
 def plot_confirmed(data, first_row=0):
@@ -73,7 +73,7 @@ def plot_confirmed(data, first_row=0):
     last_date = data[COL_DATE].iloc[-1]
 
     for col, label in REGION_COLUMNS.items():
-        key = 'confirmados_' + col
+        key = 'new_confirmados_' + col
 
         y = (data[key]
             .div(REGION_POP[col])
@@ -133,7 +133,7 @@ def plot_deaths(data, first_row=0):
     fig, ax = plot_init()
 
     for col, label in REGION_COLUMNS.items():
-        y = (data['obitos_' + col]
+        y = (data['new_obitos_' + col]
                 .div(REGION_POP[col])
                 .mul(100000)
                 .rolling(7)
@@ -153,7 +153,7 @@ def plot_deaths(data, first_row=0):
             linewidth=1,
             alpha=0.7)
 
-    y = (data['obitos']
+    y = (data['new_obitos']
             .div(TOTAL_POP)
             .mul(100000)
             .rolling(7)
@@ -177,6 +177,78 @@ def plot_deaths(data, first_row=0):
     plt.legend(loc='upper left')
 
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Novos óbitos / 100.000 habitantes | Média móvel de 7 dias | '
+    title += data[COL_DATE].iloc[-1].strftime('%Y-%m-%d')
+    plt.title(title, loc='left',)
+
+    plot_footer()
+
+def plot_global(data, first_row=0):
+    x = data[COL_DATE]
+
+    fig, ax1 = plot_init()
+
+    ax1.axes.get_yaxis().set_visible(False)
+    ax2 = ax1.twinx()
+    ax3 = ax1.twinx()
+    ax4 = ax1.twinx()
+
+    ax1.minorticks_on()
+    ax2.minorticks_on()
+    ax3.minorticks_on()
+    ax4.minorticks_on()
+
+    # Novos óbitos
+    ax2.spines["right"].set_position(("outward", 10))
+    ax2.spines["right"].set_color('#000000')
+    deaths = ax2.plot(
+        x[first_row:],
+        data['obitos']
+            .div(TOTAL_POP)
+            .mul(100000)
+            .rolling(7)
+            .mean()[first_row:],
+        label='Óbitos',
+        color='#000000',
+        marker='o',
+        markersize=1.5)
+
+    # Novos confirmados
+    ax3.spines["right"].set_position(("outward", 50))
+    ax3.spines["right"].set_color('#ff0000')
+    confirmed = ax3.plot(
+        x[first_row:],
+        data['confirmados']
+            .div(TOTAL_POP)
+            .mul(100000)
+            .rolling(7)
+            .mean()[first_row:],
+        label='Confirmados',
+        color='#ff0000',
+        marker='o',
+        markersize=1.5)
+
+
+    # Recuperados
+    ax4.spines["right"].set_position(("outward", 90))
+    ax4.spines["right"].set_color('#00ff00')
+    confirmed = ax3.plot(
+        x[first_row:],
+        data['recuperados']
+            .div(TOTAL_POP)
+            .mul(100000)
+            .rolling(7)
+            .mean()[first_row:],
+        label='Recuperados',
+        color='#00ff00',
+        marker='o',
+        markersize=1.5)
+
+    # legend
+    lns = deaths + confirmed
+    labs = [l.get_label() for l in lns]
+    ax1.legend(lns, labs, loc='upper left')
+
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Média móvel de 7 dias | '
     title += data[COL_DATE].iloc[-1].strftime('%Y-%m-%d')
     plt.title(title, loc='left',)
 
@@ -267,7 +339,7 @@ def new(data, columns):
             new.append(v - prev)
             prev = v
 
-        data[col] = new
+        data['new_' + col] = new
 
     return data
 

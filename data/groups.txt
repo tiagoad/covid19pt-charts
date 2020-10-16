@@ -1,0 +1,309 @@
+NUTS I,NUTS II,NUTS III,Distrito,Concelhos
+Portugal Continental,Região do Norte,Alto Minho,Viana do Castelo,Arcos de Valdevez
+Portugal Continental,Região do Norte,Alto Minho,Viana do Castelo,Caminha
+Portugal Continental,Região do Norte,Alto Minho,Viana do Castelo,Melgaço
+Portugal Continental,Região do Norte,Alto Minho,Viana do Castelo,Monção
+Portugal Continental,Região do Norte,Alto Minho,Viana do Castelo,Paredes de Coura
+Portugal Continental,Região do Norte,Alto Minho,Viana do Castelo,Ponte da Barca
+Portugal Continental,Região do Norte,Alto Minho,Viana do Castelo,Ponte de Lima
+Portugal Continental,Região do Norte,Alto Minho,Viana do Castelo,Valença
+Portugal Continental,Região do Norte,Alto Minho,Viana do Castelo,Viana do Castelo
+Portugal Continental,Região do Norte,Alto Minho,Viana do Castelo,Vila Nova de Cerveira
+Portugal Continental,Região do Norte,Cávado,Braga,Amares
+Portugal Continental,Região do Norte,Cávado,Braga,Barcelos
+Portugal Continental,Região do Norte,Cávado,Braga,Braga
+Portugal Continental,Região do Norte,Cávado,Braga,Esposende
+Portugal Continental,Região do Norte,Cávado,Braga,Terras de Bouro
+Portugal Continental,Região do Norte,Cávado,Braga,Vila Verde
+Portugal Continental,Região do Norte,Ave,Braga,Cabeceiras de Basto
+Portugal Continental,Região do Norte,Ave,Braga,Fafe
+Portugal Continental,Região do Norte,Ave,Braga,Guimarães
+Portugal Continental,Região do Norte,Ave,Vila Real,Mondim de Basto
+Portugal Continental,Região do Norte,Ave,Braga,Póvoa de Lanhoso
+Portugal Continental,Região do Norte,Ave,Braga,Vieira do Minho
+Portugal Continental,Região do Norte,Ave,Braga,Vila Nova de Famalicão
+Portugal Continental,Região do Norte,Ave,Braga,Vizela
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Aveiro,Arouca
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Aveiro,Espinho
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Porto,Gondomar
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Porto,Maia
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Porto,Matosinhos
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Aveiro,Oliveira de Azeméis
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Porto,Paredes
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Porto,Porto
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Porto,Póvoa de Varzim
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Aveiro,Santa Maria da Feira
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Porto,Santo Tirso
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Aveiro,São João da Madeira
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Porto,Trofa
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Aveiro,Vale de Cambra
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Porto,Valongo
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Porto,Vila do Conde
+Portugal Continental,Região do Norte,Área Metropolitana do Porto,Porto,Vila Nova de Gaia
+Portugal Continental,Região do Norte,Tâmega e Sousa,Porto,Amarante
+Portugal Continental,Região do Norte,Tâmega e Sousa,Porto,Baião
+Portugal Continental,Região do Norte,Tâmega e Sousa,Aveiro,Castelo de Paiva
+Portugal Continental,Região do Norte,Tâmega e Sousa,Braga,Celorico de Basto
+Portugal Continental,Região do Norte,Tâmega e Sousa,Viseu,Cinfães
+Portugal Continental,Região do Norte,Tâmega e Sousa,Porto,Felgueiras
+Portugal Continental,Região do Norte,Tâmega e Sousa,Porto,Lousada
+Portugal Continental,Região do Norte,Tâmega e Sousa,Porto,Marco de Canaveses
+Portugal Continental,Região do Norte,Tâmega e Sousa,Porto,Paços de Ferreira
+Portugal Continental,Região do Norte,Tâmega e Sousa,Porto,Penafiel
+Portugal Continental,Região do Norte,Tâmega e Sousa,Viseu,Resende
+Portugal Continental,Região do Norte,Alto Tâmega,Vila Real,Boticas
+Portugal Continental,Região do Norte,Alto Tâmega,Vila Real,Chaves
+Portugal Continental,Região do Norte,Alto Tâmega,Vila Real,Montalegre
+Portugal Continental,Região do Norte,Alto Tâmega,Vila Real,Ribeira de Pena
+Portugal Continental,Região do Norte,Alto Tâmega,Vila Real,Valpaços
+Portugal Continental,Região do Norte,Alto Tâmega,Vila Real,Vila Pouca de Aguiar
+Portugal Continental,Região do Norte,Douro,Vila Real,Alijó
+Portugal Continental,Região do Norte,Douro,Viseu,Armamar
+Portugal Continental,Região do Norte,Douro,Bragança,Carrazeda de Ansiães
+Portugal Continental,Região do Norte,Douro,Bragança,Freixo de Espada à Cinta
+Portugal Continental,Região do Norte,Douro,Viseu,Lamego
+Portugal Continental,Região do Norte,Douro,Vila Real,Mesão Frio
+Portugal Continental,Região do Norte,Douro,Viseu,Moimenta da Beira
+Portugal Continental,Região do Norte,Douro,Vila Real,Murça
+Portugal Continental,Região do Norte,Douro,Viseu,Penedono
+Portugal Continental,Região do Norte,Douro,Vila Real,Peso da Régua
+Portugal Continental,Região do Norte,Douro,Vila Real,Sabrosa
+Portugal Continental,Região do Norte,Douro,Vila Real,Santa Marta de Penaguião
+Portugal Continental,Região do Norte,Douro,Viseu,São João da Pesqueira
+Portugal Continental,Região do Norte,Douro,Viseu,Sernancelhe
+Portugal Continental,Região do Norte,Douro,Viseu,Tabuaço
+Portugal Continental,Região do Norte,Douro,Viseu,Tarouca
+Portugal Continental,Região do Norte,Douro,Bragança,Torre de Moncorvo
+Portugal Continental,Região do Norte,Douro,Guarda,Vila Nova de Foz Côa
+Portugal Continental,Região do Norte,Douro,Vila Real,Vila Real
+Portugal Continental,Região do Norte,Terras de Trás-os-Montes,Bragança,Alfândega da Fé
+Portugal Continental,Região do Norte,Terras de Trás-os-Montes,Bragança,Bragança
+Portugal Continental,Região do Norte,Terras de Trás-os-Montes,Bragança,Macedo de Cavaleiros
+Portugal Continental,Região do Norte,Terras de Trás-os-Montes,Bragança,Miranda do Douro
+Portugal Continental,Região do Norte,Terras de Trás-os-Montes,Bragança,Mirandela
+Portugal Continental,Região do Norte,Terras de Trás-os-Montes,Bragança,Mogadouro
+Portugal Continental,Região do Norte,Terras de Trás-os-Montes,Bragança,Vila Flor
+Portugal Continental,Região do Norte,Terras de Trás-os-Montes,Bragança,Vimioso
+Portugal Continental,Região do Norte,Terras de Trás-os-Montes,Bragança,Vinhais
+Portugal Continental,Região do Centro,Região de Aveiro,Aveiro,Águeda
+Portugal Continental,Região do Centro,Região de Aveiro,Aveiro,Albergaria-a-Velha
+Portugal Continental,Região do Centro,Região de Aveiro,Aveiro,Anadia
+Portugal Continental,Região do Centro,Região de Aveiro,Aveiro,Aveiro
+Portugal Continental,Região do Centro,Região de Aveiro,Aveiro,Estarreja
+Portugal Continental,Região do Centro,Região de Aveiro,Aveiro,Ílhavo
+Portugal Continental,Região do Centro,Região de Aveiro,Aveiro,Murtosa
+Portugal Continental,Região do Centro,Região de Aveiro,Aveiro,Oliveira do Bairro
+Portugal Continental,Região do Centro,Região de Aveiro,Aveiro,Ovar
+Portugal Continental,Região do Centro,Região de Aveiro,Aveiro,Sever do Vouga
+Portugal Continental,Região do Centro,Região de Aveiro,Aveiro,Vagos
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Arganil
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Cantanhede
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Coimbra
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Condeixa-a-Nova
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Figueira da Foz
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Góis
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Lousã
+Portugal Continental,Região do Centro,Região de Coimbra,Aveiro,Mealhada
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Mira
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Miranda do Corvo
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Montemor-o-Velho
+Portugal Continental,Região do Centro,Região de Coimbra,Viseu,Mortágua
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Oliveira do Hospital
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Pampilhosa da Serra
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Penacova
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Penela
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Soure
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Tábua
+Portugal Continental,Região do Centro,Região de Coimbra,Coimbra,Vila Nova de Poiares
+Portugal Continental,Região do Centro,Região de Leiria,Leiria,Batalha
+Portugal Continental,Região do Centro,Região de Leiria,Leiria,Leiria
+Portugal Continental,Região do Centro,Região de Leiria,Leiria,Marinha Grande
+Portugal Continental,Região do Centro,Região de Leiria,Leiria,Pombal
+Portugal Continental,Região do Centro,Região de Leiria,Leiria,Porto de Mós
+Portugal Continental,Região do Centro,Região de Leiria,Leiria,Alvaiázere
+Portugal Continental,Região do Centro,Região de Leiria,Leiria,Ansião
+Portugal Continental,Região do Centro,Região de Leiria,Leiria,Castanheira de Pêra
+Portugal Continental,Região do Centro,Região de Leiria,Leiria,Figueiró dos Vinhos
+Portugal Continental,Região do Centro,Região de Leiria,Leiria,Pedrógão Grande
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Guarda,Aguiar da Beira
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Carregal do Sal
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Castro Daire
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Mangualde
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Nelas
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Oliveira de Frades
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Penalva do Castelo
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Santa Comba Dão
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,São Pedro do Sul
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Sátão
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Tondela
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Vila Nova de Paiva
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Viseu
+Portugal Continental,Região do Centro,Viseu Dão Lafões,Viseu,Vouzela
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Almeida
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Castelo Branco,Belmonte
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Celorico da Beira
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Castelo Branco,Covilhã
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Figueira de Castelo Rodrigo
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Fornos de Algodres
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Castelo Branco,Fundão
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Gouveia
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Guarda
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Manteigas
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Mêda
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Pinhel
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Sabugal
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Seia
+Portugal Continental,Região do Centro,Beiras e Serra da Estrela,Guarda,Trancoso
+Portugal Continental,Região do Centro,Beira Baixa,Castelo Branco,Castelo Branco
+Portugal Continental,Região do Centro,Beira Baixa,Castelo Branco,Idanha-a-Nova
+Portugal Continental,Região do Centro,Beira Baixa,Castelo Branco,Oleiros
+Portugal Continental,Região do Centro,Beira Baixa,Castelo Branco,Penamacor
+Portugal Continental,Região do Centro,Beira Baixa,Castelo Branco,Proença-a-Nova
+Portugal Continental,Região do Centro,Beira Baixa,Castelo Branco,Vila Velha de Ródão
+Portugal Continental,Região do Centro,Oeste,Leiria,Alcobaça
+Portugal Continental,Região do Centro,Oeste,Lisboa,Alenquer
+Portugal Continental,Região do Centro,Oeste,Lisboa,Arruda dos Vinhos
+Portugal Continental,Região do Centro,Oeste,Leiria,Bombarral
+Portugal Continental,Região do Centro,Oeste,Lisboa,Cadaval
+Portugal Continental,Região do Centro,Oeste,Leiria,Caldas da Rainha
+Portugal Continental,Região do Centro,Oeste,Lisboa,Lourinhã
+Portugal Continental,Região do Centro,Oeste,Leiria,Nazaré
+Portugal Continental,Região do Centro,Oeste,Leiria,Óbidos
+Portugal Continental,Região do Centro,Oeste,Leiria,Peniche
+Portugal Continental,Região do Centro,Oeste,Lisboa,Sobral de Monte Agraço
+Portugal Continental,Região do Centro,Oeste,Lisboa,Torres Vedras
+Portugal Continental,Região do Centro,Médio Tejo,Santarém,Abrantes
+Portugal Continental,Região do Centro,Médio Tejo,Santarém,Alcanena
+Portugal Continental,Região do Centro,Médio Tejo,Santarém,Constância
+Portugal Continental,Região do Centro,Médio Tejo,Santarém,Entroncamento
+Portugal Continental,Região do Centro,Médio Tejo,Santarém,Ferreira do Zêzere
+Portugal Continental,Região do Centro,Médio Tejo,Santarém,Mação
+Portugal Continental,Região do Centro,Médio Tejo,Santarém,Ourém
+Portugal Continental,Região do Centro,Médio Tejo,Santarém,Sardoal
+Portugal Continental,Região do Centro,Médio Tejo,Castelo Branco,Sertã
+Portugal Continental,Região do Centro,Médio Tejo,Santarém,Tomar
+Portugal Continental,Região do Centro,Médio Tejo,Santarém,Torres Novas
+Portugal Continental,Região do Centro,Médio Tejo,Castelo Branco,Vila de Rei
+Portugal Continental,Região do Centro,Médio Tejo,Santarém,Vila Nova da Barquinha
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Setúbal,Alcochete
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Setúbal,Almada
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Lisboa,Amadora
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Setúbal,Barreiro
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Lisboa,Cascais
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Lisboa,Lisboa
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Lisboa,Loures
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Lisboa,Mafra
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Setúbal,Moita
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Setúbal,Montijo
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Lisboa,Odivelas
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Lisboa,Oeiras
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Setúbal,Palmela
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Setúbal,Seixal
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Setúbal,Sesimbra
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Setúbal,Setúbal
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Lisboa,Sintra
+Portugal Continental,Região de Lisboa,Área Metropolitana de Lisboa,Lisboa,Vila Franca de Xira
+Portugal Continental,Alentejo,Lezíria do Tejo,Santarém,Almeirim
+Portugal Continental,Alentejo,Lezíria do Tejo,Santarém,Alpiarça
+Portugal Continental,Alentejo,Lezíria do Tejo,Lisboa,Azambuja
+Portugal Continental,Alentejo,Lezíria do Tejo,Santarém,Benavente
+Portugal Continental,Alentejo,Lezíria do Tejo,Santarém,Cartaxo
+Portugal Continental,Alentejo,Lezíria do Tejo,Santarém,Chamusca
+Portugal Continental,Alentejo,Lezíria do Tejo,Santarém,Coruche
+Portugal Continental,Alentejo,Lezíria do Tejo,Santarém,Golegã
+Portugal Continental,Alentejo,Lezíria do Tejo,Santarém,Rio Maior
+Portugal Continental,Alentejo,Lezíria do Tejo,Santarém,Salvaterra de Magos
+Portugal Continental,Alentejo,Lezíria do Tejo,Santarém,Santarém
+Portugal Continental,Alentejo,Alentejo Litoral,Setúbal,Alcácer do Sal
+Portugal Continental,Alentejo,Alentejo Litoral,Setúbal,Grândola
+Portugal Continental,Alentejo,Alentejo Litoral,Beja,Odemira
+Portugal Continental,Alentejo,Alentejo Litoral,Setúbal,Santiago do Cacém
+Portugal Continental,Alentejo,Alentejo Litoral,Setúbal,Sines
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Alter do Chão
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Arronches
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Avis
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Campo Maior
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Castelo de Vide
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Crato
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Elvas
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Fronteira
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Gavião
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Marvão
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Monforte
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Nisa
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Ponte de Sor
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Portalegre
+Portugal Continental,Alentejo,Alto Alentejo,Portalegre,Sousel
+Portugal Continental,Alentejo,Alentejo Central,Évora,Alandroal
+Portugal Continental,Alentejo,Alentejo Central,Évora,Arraiolos
+Portugal Continental,Alentejo,Alentejo Central,Évora,Borba
+Portugal Continental,Alentejo,Alentejo Central,Évora,Estremoz
+Portugal Continental,Alentejo,Alentejo Central,Évora,Évora
+Portugal Continental,Alentejo,Alentejo Central,Évora,Montemor-o-Novo
+Portugal Continental,Alentejo,Alentejo Central,Évora,Mora
+Portugal Continental,Alentejo,Alentejo Central,Évora,Mourão
+Portugal Continental,Alentejo,Alentejo Central,Évora,Portel
+Portugal Continental,Alentejo,Alentejo Central,Évora,Redondo
+Portugal Continental,Alentejo,Alentejo Central,Évora,Reguengos de Monsaraz
+Portugal Continental,Alentejo,Alentejo Central,Évora,Vendas Novas
+Portugal Continental,Alentejo,Alentejo Central,Évora,Viana do Alentejo
+Portugal Continental,Alentejo,Alentejo Central,Évora,Vila Viçosa
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Aljustrel
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Almodôvar
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Alvito
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Barrancos
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Beja
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Castro Verde
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Cuba
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Ferreira do Alentejo
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Mértola
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Moura
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Ourique
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Serpa
+Portugal Continental,Alentejo,Baixo Alentejo,Beja,Vidigueira
+Portugal Continental,Algarve,Algarve,Faro,Albufeira
+Portugal Continental,Algarve,Algarve,Faro,Alcoutim
+Portugal Continental,Algarve,Algarve,Faro,Aljezur
+Portugal Continental,Algarve,Algarve,Faro,Castro Marim
+Portugal Continental,Algarve,Algarve,Faro,Faro
+Portugal Continental,Algarve,Algarve,Faro,Lagoa
+Portugal Continental,Algarve,Algarve,Faro,Lagos
+Portugal Continental,Algarve,Algarve,Faro,Loulé
+Portugal Continental,Algarve,Algarve,Faro,Monchique
+Portugal Continental,Algarve,Algarve,Faro,Olhão
+Portugal Continental,Algarve,Algarve,Faro,Portimão
+Portugal Continental,Algarve,Algarve,Faro,São Brás de Alportel
+Portugal Continental,Algarve,Algarve,Faro,Silves
+Portugal Continental,Algarve,Algarve,Faro,Tavira
+Portugal Continental,Algarve,Algarve,Faro,Vila do Bispo
+Portugal Continental,Algarve,Algarve,Faro,Vila Real de Santo António
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,Terceira(Grupo Central),Angra do Heroísmo
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,São Jorge(Grupo Central),Calheta
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,Corvo(Grupo Ocidental),Corvo
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,Faial(Grupo Central),Horta
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,São Miguel(Grupo Oriental),Lagoa
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,Flores(Grupo Ocidental),Lajes das Flores
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,Pico(Grupo Central),Lajes do Pico
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,Pico(Grupo Central),Madalena
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,São Miguel(Grupo Oriental),Nordeste
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,São Miguel(Grupo Oriental),Ponta Delgada
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,São Miguel(Grupo Oriental),Povoação
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,Terceira(Grupo Central),Vila da Praia da Vitória
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,São Miguel(Grupo Oriental),Ribeira Grande
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,Graciosa(Grupo Central),Santa Cruz da Graciosa
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,Flores(Grupo Ocidental),Santa Cruz das Flores
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,Pico(Grupo Central),São Roque do Pico
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,São Jorge(Grupo Central),Velas
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,Santa Maria(Grupo Oriental),Vila do Porto
+Região Autónoma dos Açores,Região Autónoma dos Açores,Região Autónoma dos Açores,São Miguel(Grupo Oriental),Vila Franca do Campo
+Região Autónoma da Madeira,Região Autónoma da Madeira,Região Autónoma da Madeira,Madeira,Calheta
+Região Autónoma da Madeira,Região Autónoma da Madeira,Região Autónoma da Madeira,Madeira,Câmara de Lobos
+Região Autónoma da Madeira,Região Autónoma da Madeira,Região Autónoma da Madeira,Madeira,Funchal
+Região Autónoma da Madeira,Região Autónoma da Madeira,Região Autónoma da Madeira,Madeira,Machico
+Região Autónoma da Madeira,Região Autónoma da Madeira,Região Autónoma da Madeira,Madeira,Ponta do Sol
+Região Autónoma da Madeira,Região Autónoma da Madeira,Região Autónoma da Madeira,Madeira,Porto Moniz
+Região Autónoma da Madeira,Região Autónoma da Madeira,Região Autónoma da Madeira,Porto Santo,Porto Santo
+Região Autónoma da Madeira,Região Autónoma da Madeira,Região Autónoma da Madeira,Madeira,Ribeira Brava
+Região Autónoma da Madeira,Região Autónoma da Madeira,Região Autónoma da Madeira,Madeira,Santa Cruz
+Região Autónoma da Madeira,Região Autónoma da Madeira,Região Autónoma da Madeira,Madeira,Santana
+Região Autónoma da Madeira,Região Autónoma da Madeira,Região Autónoma da Madeira,Madeira,São Vicente

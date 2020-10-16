@@ -8,7 +8,7 @@ Run `poetry shell` to enter a virtualenv shell, and run `python chart.py` to gen
 
 This script is really not well written nor production code. I did this on a few weekends seeking just some nice charts. Hope you like them.
 
-![](output/newcases.png)
-![](output/newcases_90d.png)
-![](output/newdeaths.png)
-![](output/newdeaths_90d.png)
+![](https://covid19.tdias.pt/output/newcases.png)
+![](https://covid19.tdias.pt/output/newcases_90d.png)
+![](https://covid19.tdias.pt/output/newdeaths.png)
+![](https://covid19.tdias.pt/output/newdeaths_90d.png)

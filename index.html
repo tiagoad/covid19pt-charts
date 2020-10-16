@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>#COVID19PT - Gráficos</title>
+		<style type="text/css">
+			html, body {
+				background: #ddd;
+				margin: 0 !important;
+				padding: 0 !important;
+
+				box-sizing: border-box;
+
+			}
+
+			#container {
+				font-family: Helvetica, Arial, sans-serif;
+				background-color: #fff;
+
+				max-width: 800px;
+				padding: 1px 3em;
+				margin: 0 auto;
+
+			}
+
+			img {
+				width: 100%;
+			}
+
+			hr {
+				border: 1px solid #999;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<p>
+				Esta página contém alguns gráficos que acho interessantes, gerados a partir dos 
+				<a href="https://github.com/dssg-pt/covid19pt-data">dados da DSSG-PT</a>.
+			</p>
+
+			<p>Todos os gráficos têm uma média móvel de 7 dias, para eliminar o efeito dos fins-de-semana.</p>
+
+			<p>
+				O código está disponível em 
+				<a href="https://github.com/tiagoad/covid19pt-charts">https://github.com/tiagoad/covid19pt-charts</a>.
+			</p>
+
+			<p>
+				Por qualquer motivo, contactem-me por email: <a href="mailto:tiago@tdias.tech">tiago@tdias.tech</a>
+			</p>
+
+			<hr/>
+
+			<img src="output/newcases.png" />
+			<img src="output/newcases_90d.png" />
+
+			<hr/>
+
+			<img src="output/newdeaths.png" />
+			<img src="output/newdeaths_90d.png" />
+
+			<hr/>
+			<br/>
+		</div>
+	</body>
+</html>

@@ -26,8 +26,12 @@ jobs:
         run: |
           pip install poetry
           poetry install
-          ./update-data.sh
-          poetry run python chart.py
+
+      - name: Download COVID19 data
+        run: ./update-data.sh
+
+      - name: Generate charts
+        run: poetry run python chart.py
           
       - name: Deploy to Github Pages
         uses: JamesIves/github-pages-deploy-action@3.6.2

@@ -310,7 +310,7 @@ def plot_init():
 
 
 def plot_footer():
-    plt.figtext(0.985, 0.023, 'Fonte: DGS via gh.com/dssg-pt/covid19pt-data', horizontalalignment='right', verticalalignment='center', color='#BBBBBB')
+    plt.figtext(0.985, 0.023, 'https://covid19.tdias.pt', horizontalalignment='right', verticalalignment='center', color='#BBBBBB')
 
 #####
 

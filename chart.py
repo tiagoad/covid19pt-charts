@@ -510,7 +510,7 @@ def plot_active(data):
         x,
         y,
         color='#000000',
-        label='Casos ativos'
+        label='Casos ativos',
         marker='o',
         markersize=1.5)
 

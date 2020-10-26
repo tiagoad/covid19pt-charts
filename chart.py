@@ -102,10 +102,13 @@ def main():
     plot_confirmed_ages(data)
     plt.savefig('output/newcases_age.png')
 
-
     print('newdeaths_age.png')
     plot_deaths_age(data)
     plt.savefig('output/newdeaths_age.png')
+
+    print('hospital.png')
+    plot_hospital(data)
+    plt.savefig('output/hospital.png')
 
 
 def plot_confirmed(data, first_row=0):
@@ -439,6 +442,40 @@ def plot_deaths_age(data):
 
     plot_footer()
 
+
+def plot_hospital(data):
+
+    last_date = data[COL_DATE].iloc[-1]
+
+    x = data[COL_DATE]
+
+    fig, ax = plot_init()
+
+    plt.plot(
+        x,
+        data['internados_enfermaria'],
+        label='Enfermaria',
+        color='#000000',
+        marker='o',
+        markersize=1.5)
+
+    plt.plot(
+        x,
+        data['internados_uci'],
+        label='Cuidados intensivos',
+        color='#DD0000',
+        marker='o',
+        markersize=1.5)
+
+    ####
+
+    plt.legend(loc='upper left')
+
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Hospitalizações | '
+    title += last_date.strftime('%Y-%m-%d')
+    plt.title(title, loc='left')
+
+    plot_footer()
 
 #####
 

@@ -543,12 +543,6 @@ def plot_tests(data):
         color='#000000',
         marker='o',
         markersize=1.5)
-    plt.axhline(
-        y=y.iloc[-1],
-        color=p[0].get_color(),
-        linestyle='solid',
-        linewidth=1,
-        alpha=0.7)
 
     y = data['confirmados_novos'].rolling(7).mean()
     p = plt.plot(
@@ -558,12 +552,7 @@ def plot_tests(data):
         color='#DD0000',
         marker='o',
         markersize=1.5)
-    plt.axhline(
-        y=y.iloc[-1],
-        color=p[0].get_color(),
-        linestyle='solid',
-        linewidth=1,
-        alpha=0.7)
+
 
     ####
 

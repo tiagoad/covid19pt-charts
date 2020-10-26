@@ -539,7 +539,7 @@ def plot_tests(data):
     p = plt.plot(
         x,
         y,
-        label='Testes realizados (por dia)',
+        label='Testes realizados',
         color='#000000',
         marker='o',
         markersize=1.5)
@@ -548,7 +548,7 @@ def plot_tests(data):
     p = plt.plot(
         x,
         y,
-        label='Casos confirmados (por dia)',
+        label='Testes positivos',
         color='#DD0000',
         marker='o',
         markersize=1.5)

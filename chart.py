@@ -28,6 +28,19 @@ REGION_POP = dict(
     arsalgarve=451006,
     acores=242796,
     madeira=254254)
+
+AGE_COLUMNS = {
+    '0_9': '0-9',
+    '10_19': '10-19',
+    '20_29': '20-29',
+    '30_39': '30-39',
+    '40_49': '40-49',
+    '50_59': '50-59',
+    '60_69': '60-69',
+    '70_79': '70-79',
+    '80_plus': '80+'
+}
+
 TOTAL_POP = sum(REGION_POP.values())
 
 COL_DATE = 'data_dados'
@@ -35,6 +48,13 @@ COL_TOTAL = 'confirmados_novos'
 COL_REGION_CONFIRMED = ['confirmados_' + k for k in REGION_COLUMNS.keys()]
 COL_REGION_DEATHS = ['obitos_' + k for k in REGION_COLUMNS.keys()]
 COL_REGION_RECOVERED = ['recovered_' + k for k in REGION_COLUMNS.keys()]
+COL_AGE = sum([[
+        'confirmados_' + k + '_m',
+        'confirmados_' + k + '_f',
+        'obitos_' + k + '_m',
+        'obitos_' + k + '_f',
+    ] for k in AGE_COLUMNS.keys()], [])
+
 
 DPI = 150
 WIDTH = 1200
@@ -49,27 +69,43 @@ def main():
     print('Loading data')
     data = load_data()
     print('Processing new cases')
-    data = new(data, COL_REGION_CONFIRMED + COL_REGION_DEATHS + ['obitos', 'n_confirmados', 'recuperados', 'internados', 'internados_uci'])
+
+    data = new(data, COL_REGION_CONFIRMED + COL_REGION_DEATHS + COL_AGE + ['obitos', 'n_confirmados', 'recuperados', 'internados', 'internados_uci'])
 
     print('Plotting charts')
 
+    print('newcases.png')
     plot_confirmed(data)
     plt.savefig('output/newcases.png')
 
+    print('newcases_90d.png')
     plot_confirmed(data, -90)
     plt.savefig('output/newcases_90d.png')
 
+    print('newdeaths.png')
     plot_deaths(data)
     plt.savefig('output/newdeaths.png')
 
+    print('newdeaths_90d.png')
     plot_deaths(data, -90)
     plt.savefig('output/newdeaths_90d.png')
 
+    print('national.png')
     plot_global(data)
     plt.savefig('output/national.png')
 
+    print('newcases_percent.png')
     plot_confirmed_percent(data)
     plt.savefig('output/newcases_percent.png')
+
+    print('newcases_age.png')
+    plot_confirmed_ages(data)
+    plt.savefig('output/newcases_age.png')
+
+
+    print('newdeaths_age.png')
+    plot_deaths_age(data)
+    plt.savefig('output/newdeaths_age.png')
 
 
 def plot_confirmed(data, first_row=0):
@@ -127,7 +163,7 @@ def plot_confirmed(data, first_row=0):
 
     plt.legend(loc='upper left')
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Novos casos / 100.000 habitantes | Média móvel de 7 dias | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Novos positivos / 100.000 habitantes | Média móvel de 7 dias | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
@@ -309,7 +345,6 @@ def plot_confirmed_percent(data, first_row=0):
     p = plt.plot(
         x[first_row:],
         y[first_row:],
-        label='Novos casos confirmados (%)',
         color='#000000',
         marker='o',
         markersize=1.5)
@@ -322,18 +357,87 @@ def plot_confirmed_percent(data, first_row=0):
         linewidth=1,
         alpha=1)
 
-    print(data.iloc[-1])
-
     ####
 
     #plt.legend(loc='upper left')
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de novos casos confirmados | Média móvel de 7 dias | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de novos testes positivos | Média móvel de 7 dias | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
     plot_footer()
 
+def plot_confirmed_ages(data):
+
+    last_date = data[COL_DATE].iloc[-1]
+
+    x = data[COL_DATE]
+
+    fig, ax = plot_init()
+
+    df = pd.DataFrame()
+    labels = []
+
+    # sum m and f, and add to dataframe
+    for k, v in AGE_COLUMNS.items():
+        df[k] = data['new_confirmados_' + k + '_f'] + data['new_confirmados_' + k + '_m']
+        labels.append(v)
+
+
+    # turn into percentages
+    df = df.apply(lambda r: r/r.sum(), axis=1).rolling(7).mean().mul(100)
+
+
+    plt.stackplot(x, df.transpose(), labels=labels)
+    
+
+    ####
+
+    # reverse legend
+    handles, labels = ax.get_legend_handles_labels()
+    plt.legend(reversed(handles), reversed(labels), loc='upper left')
+
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de novos confirmados por faixa etária | Média móvel de 7 dias | '
+    title += last_date.strftime('%Y-%m-%d')
+    plt.title(title, loc='left')
+
+    plot_footer()
+
+def plot_deaths_age(data):
+
+    last_date = data[COL_DATE].iloc[-1]
+
+    x = data[COL_DATE]
+
+    fig, ax = plot_init()
+
+    df = pd.DataFrame()
+    labels = []
+
+    # sum m and f, and add to dataframe
+    for k, v in AGE_COLUMNS.items():
+        df[k] = data['new_obitos_' + k + '_f'] + data['new_obitos_' + k + '_m']
+        labels.append(v)
+
+
+    # turn into percentages
+    df = df.apply(lambda r: r/r.sum(), axis=1).rolling(7, min_periods=1).mean().mul(100)
+
+
+    plt.stackplot(x, df.transpose(), labels=labels)
+    
+
+    ####
+
+    # reverse legend
+    handles, labels = ax.get_legend_handles_labels()
+    plt.legend(reversed(handles), reversed(labels), loc='upper left')
+
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de novos óbitos por faixa etária | Média móvel de 7 dias | '
+    title += last_date.strftime('%Y-%m-%d')
+    plt.title(title, loc='left')
+
+    plot_footer()
 
 
 #####
@@ -362,7 +466,7 @@ def plot_init():
     ax.xaxis.set_major_formatter(week_fmt)
     ax.xaxis.set_minor_locator(days)
     plt.xticks(rotation=45, fontsize=8)
-    ax.grid(axis='both', color='#F0F0F0')
+    ax.grid(axis='both', color='#000000', alpha=0.05)
     ax.set_xlabel('semana (segunda-feira)')
     return fig, ax
 
@@ -377,7 +481,7 @@ def load_data():
     data_main = pd.read_csv(DATA_FILE)
     samples = pd.read_csv(SAMPLES_FILE)
 
-    data = pd.merge(data_main, samples, how='inner', left_index=True, right_index=True)
+    data = pd.merge(data_main, samples, how='left', on='data')
 
     data[COL_DATE] = pd.to_datetime(
         data[COL_DATE],

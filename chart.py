@@ -397,7 +397,7 @@ def plot_confirmed_ages(data):
     handles, labels = ax.get_legend_handles_labels()
     plt.legend(reversed(handles), reversed(labels), loc='upper left')
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de novos confirmados por faixa etária | Média móvel de 7 dias | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Novos positivos por faixa etária (%) | Média móvel de 7 dias | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
@@ -433,7 +433,7 @@ def plot_deaths_age(data):
     handles, labels = ax.get_legend_handles_labels()
     plt.legend(reversed(handles), reversed(labels), loc='upper left')
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de novos óbitos por faixa etária | Média móvel de 7 dias | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Novos óbitos por faixa etária (%) | Média móvel de 7 dias | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 

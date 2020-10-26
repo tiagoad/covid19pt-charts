@@ -110,6 +110,10 @@ def main():
     plot_hospital(data)
     plt.savefig('output/hospital.png')
 
+    print('active.png')
+    plot_active(data)
+    plt.savefig('output/active.png')
+
 
 def plot_confirmed(data, first_row=0):
     x = data[COL_DATE]
@@ -337,9 +341,6 @@ def plot_confirmed_percent(data, first_row=0):
 
     fig, ax = plot_init()
 
-
-    #
-
     y = ((data['confirmados_novos'] / data['amostras_novas'])
             .mul(100)
             .rolling(7)
@@ -359,10 +360,6 @@ def plot_confirmed_percent(data, first_row=0):
         linestyle='solid',
         linewidth=1,
         alpha=1)
-
-    ####
-
-    #plt.legend(loc='upper left')
 
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de novos testes positivos | Média móvel de 7 dias | '
     title += last_date.strftime('%Y-%m-%d')
@@ -451,27 +448,72 @@ def plot_hospital(data):
 
     fig, ax = plot_init()
 
-    plt.plot(
+    y = data['internados_enfermaria']
+    p = plt.plot(
         x,
-        data['internados_enfermaria'],
+        y,
         label='Enfermaria',
         color='#000000',
         marker='o',
         markersize=1.5)
+    plt.axhline(
+        y=y.iloc[-1],
+        color=p[0].get_color(),
+        linestyle='solid',
+        linewidth=1,
+        alpha=0.7)
 
-    plt.plot(
+    y = data['internados_uci']
+    p = plt.plot(
         x,
-        data['internados_uci'],
+        y,
         label='Cuidados intensivos',
         color='#DD0000',
         marker='o',
         markersize=1.5)
+    plt.axhline(
+        y=y.iloc[-1],
+        color=p[0].get_color(),
+        linestyle='solid',
+        linewidth=1,
+        alpha=0.7)
 
     ####
 
     plt.legend(loc='upper left')
 
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Hospitalizações | '
+    title += last_date.strftime('%Y-%m-%d')
+    plt.title(title, loc='left')
+
+    plot_footer()
+
+
+def plot_active(data):
+
+    last_date = data[COL_DATE].iloc[-1]
+
+    x = data[COL_DATE]
+
+    fig, ax = plot_init()
+
+    y = data['ativos']
+
+    p = plt.plot(
+        x,
+        y,
+        color='#000000',
+        marker='o',
+        markersize=1.5)
+
+    plt.axhline(
+        y=y.iloc[-1],
+        color='#000000',
+        linestyle='solid',
+        linewidth=1,
+        alpha=1)
+
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Casos ativos | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
@@ -523,6 +565,9 @@ def load_data():
     data[COL_DATE] = pd.to_datetime(
         data[COL_DATE],
         format='%d-%m-%Y %H:%M')
+
+    #print(data.iloc[-1])
+    #exit()
 
     return data
 

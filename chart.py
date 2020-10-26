@@ -355,7 +355,8 @@ def plot_confirmed_percent(data, first_row=0):
         y[first_row:],
         color='#000000',
         marker='o',
-        markersize=1.5)
+        markersize=1.5,
+        label='Testes positivos (%)')
 
 
     plt.axhline(
@@ -368,6 +369,8 @@ def plot_confirmed_percent(data, first_row=0):
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de testes positivos | Média móvel de 7 dias | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
+
+    plt.legend(loc='upper left')
 
     plot_footer()
 
@@ -507,6 +510,7 @@ def plot_active(data):
         x,
         y,
         color='#000000',
+        label='Casos ativos'
         marker='o',
         markersize=1.5)
 
@@ -520,6 +524,8 @@ def plot_active(data):
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Casos ativos | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
+
+    plt.legend(loc='upper left')
 
     plot_footer()
 

@@ -7,6 +7,7 @@ from pylab import rcParams
 import os
 
 DATA_FILE = 'data/data.csv'
+SAMPLES_FILE = 'data/amostras.csv'
 META_FILE = 'data/regions.txt'
 GROUPS_FILE = 'data/groups.txt'
 
@@ -43,26 +44,32 @@ HEIGHT = 675
 def main():
     os.makedirs('output', exist_ok=True)
 
+    setup()
+
     print('Loading data')
     data = load_data()
     print('Processing new cases')
-    data_new = new(data, COL_REGION_CONFIRMED + COL_REGION_DEATHS + ['obitos', 'n_confirmados', 'recuperados', 'internados', 'internados_uci'])
+    data = new(data, COL_REGION_CONFIRMED + COL_REGION_DEATHS + ['obitos', 'n_confirmados', 'recuperados', 'internados', 'internados_uci'])
 
     print('Plotting charts')
-    plot_confirmed(data_new)
+
+    plot_confirmed(data)
     plt.savefig('output/newcases.png')
 
-    plot_confirmed(data_new, -90)
+    plot_confirmed(data, -90)
     plt.savefig('output/newcases_90d.png')
 
-    plot_deaths(data_new)
+    plot_deaths(data)
     plt.savefig('output/newdeaths.png')
 
-    plot_deaths(data_new, -90)
+    plot_deaths(data, -90)
     plt.savefig('output/newdeaths_90d.png')
 
-    plot_global(data_new)
+    plot_global(data)
     plt.savefig('output/national.png')
+
+    plot_confirmed_percent(data)
+    plt.savefig('output/newcases_percent.png')
 
 
 def plot_confirmed(data, first_row=0):
@@ -254,7 +261,6 @@ def plot_global(data, first_row=0):
 
     plot_footer()
 
-
 def plot_combined(data):
     x = data[COL_DATE]
 
@@ -284,8 +290,60 @@ def plot_combined(data):
 
     plot_footer()
 
+def plot_confirmed_percent(data, first_row=0):
+
+    last_date = data[COL_DATE].iloc[-1]
+
+    x = data[COL_DATE]
+
+    fig, ax = plot_init()
+
+
+    #
+
+    y = ((data['confirmados_novos'] / data['amostras_novas'])
+            .mul(100)
+            .rolling(7)
+            .mean())
+
+    p = plt.plot(
+        x[first_row:],
+        y[first_row:],
+        label='Novos casos confirmados (%)',
+        color='#000000',
+        marker='o',
+        markersize=1.5)
+
+
+    plt.axhline(
+        y=y.iloc[-1],
+        color='#000000',
+        linestyle='solid',
+        linewidth=1,
+        alpha=1)
+
+    print(data.iloc[-1])
+
+    ####
+
+    #plt.legend(loc='upper left')
+
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de novos casos confirmados | Média móvel de 7 dias | '
+    title += last_date.strftime('%Y-%m-%d')
+    plt.title(title, loc='left')
+
+    plot_footer()
+
+
 
 #####
+
+def setup():
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.width', 2000)
+    pd.set_option('display.float_format', '{:20,.2f}'.format)
+    pd.set_option('display.max_colwidth', None)
 
 def plot_init():
     plt.clf()
@@ -316,7 +374,10 @@ def plot_footer():
 
 
 def load_data():
-    data = pd.read_csv(DATA_FILE)
+    data_main = pd.read_csv(DATA_FILE)
+    samples = pd.read_csv(SAMPLES_FILE)
+
+    data = pd.merge(data_main, samples, how='inner', left_index=True, right_index=True)
 
     data[COL_DATE] = pd.to_datetime(
         data[COL_DATE],

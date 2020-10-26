@@ -569,7 +569,7 @@ def plot_tests(data):
 
     plt.legend(loc='upper left')
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Testes por dia | Média móvel de 7 dias | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Testes por dia (Escala logarítmica) | Média móvel de 7 dias | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 

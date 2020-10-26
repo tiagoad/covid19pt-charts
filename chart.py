@@ -114,6 +114,10 @@ def main():
     plot_active(data)
     plt.savefig('output/active.png')
 
+    print('tests.png')
+    plot_tests(data)
+    plt.savefig('output/tests.png')
+
 
 def plot_confirmed(data, first_row=0):
     x = data[COL_DATE]
@@ -361,7 +365,7 @@ def plot_confirmed_percent(data, first_row=0):
         linewidth=1,
         alpha=1)
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de novos testes positivos | Média móvel de 7 dias | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de testes positivos | Média móvel de 7 dias | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
@@ -519,6 +523,57 @@ def plot_active(data):
 
     plot_footer()
 
+
+
+def plot_tests(data):
+
+    last_date = data[COL_DATE].iloc[-1]
+
+    x = data[COL_DATE]
+
+    fig, ax = plot_init()
+
+    plt.yscale('log')
+
+    y = data['amostras_novas'].rolling(7).mean()
+    p = plt.plot(
+        x,
+        y,
+        label='Testes realizados (por dia)',
+        color='#000000',
+        marker='o',
+        markersize=1.5)
+    plt.axhline(
+        y=y.iloc[-1],
+        color=p[0].get_color(),
+        linestyle='solid',
+        linewidth=1,
+        alpha=0.7)
+
+    y = data['confirmados_novos'].rolling(7).mean()
+    p = plt.plot(
+        x,
+        y,
+        label='Casos confirmados (por dia)',
+        color='#DD0000',
+        marker='o',
+        markersize=1.5)
+    plt.axhline(
+        y=y.iloc[-1],
+        color=p[0].get_color(),
+        linestyle='solid',
+        linewidth=1,
+        alpha=0.7)
+
+    ####
+
+    plt.legend(loc='upper left')
+
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Testes por dia | Média móvel de 7 dias | '
+    title += last_date.strftime('%Y-%m-%d')
+    plt.title(title, loc='left')
+
+    plot_footer()
 #####
 
 def setup():

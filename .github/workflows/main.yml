@@ -21,9 +21,28 @@ jobs:
         with:
           python-version: 3.8
 
+      - name: Cache pip
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${process.env.HOME}/.cache/pip
+            .venv
+
+          key: pip-${{ hashFiles('pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
+
+      - name: Cache DSSG data
+        uses: actions/cache@v2
+        with:
+          path: vendor/covid19pt-data
+          key: dssg-${{ hashFiles('vendor/*.csv') }}
+
       - name: Install and Build
         run: |
           pip install poetry
+          poetry config virtualenvs.in-project true
           poetry install
 
       - name: Download COVID19 data

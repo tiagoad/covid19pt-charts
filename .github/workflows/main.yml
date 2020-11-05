@@ -35,11 +35,11 @@ jobs:
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
 
-      - name: Cache DSSG data
+      - name: Cache vendored data
         uses: actions/cache@v2
         with:
-          path: vendor/covid19pt-data
-          key: dssg-${{ hashFiles('vendor/*.csv') }}
+          path: vendor
+          key: vendor-data
 
       - name: Install and Build
         run: |

@@ -26,6 +26,7 @@ jobs:
 
       - name: Download COVID19 data
         run: ./update-data.sh
+        continue-on-error: ${{ github.event_name != 'schedule' }}
           
       - name: Set up Python
         uses: actions/setup-python@v1

@@ -6,8 +6,8 @@ from matplotlib.dates import FR, MO, SA, SU, TH, TU, WE
 from pylab import rcParams
 import os
 
-DATA_FILE = 'data/data.csv'
-SAMPLES_FILE = 'data/amostras.csv'
+DATA_FILE = 'vendor/dssg_data.csv'
+SAMPLES_FILE = 'vendor/dssg_samples.csv'
 META_FILE = 'data/regions.txt'
 GROUPS_FILE = 'data/groups.txt'
 

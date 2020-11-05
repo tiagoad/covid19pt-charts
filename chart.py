@@ -82,6 +82,14 @@ def main():
     plot_confirmed(data, -90)
     plt.savefig('output/newcases_90d.png')
 
+    print('newcases_noroll.png')
+    plot_confirmed(data, rolling=False)
+    plt.savefig('output/newcases_90d_noroll.png')
+
+    print('newcases_30d_noroll.png')
+    plot_confirmed(data, -30, rolling=False)
+    plt.savefig('output/newcases_30d_noroll.png')
+
     print('newdeaths.png')
     plot_deaths(data)
     plt.savefig('output/newdeaths.png')
@@ -119,7 +127,8 @@ def main():
     plt.savefig('output/tests.png')
 
 
-def plot_confirmed(data, first_row=0):
+
+def plot_confirmed(data, first_row=0, rolling=True):
     x = data[COL_DATE]
 
     fig, ax = plot_init()
@@ -131,9 +140,10 @@ def plot_confirmed(data, first_row=0):
 
         y = (data[key]
             .div(REGION_POP[col])
-            .mul(100000)
-            .rolling(7)
-            .mean())
+            .mul(100000))
+
+        if rolling:
+            y = y.rolling(7).mean()
 
         p = plt.plot(
             x[first_row:],
@@ -151,9 +161,10 @@ def plot_confirmed(data, first_row=0):
 
     y = (data[COL_TOTAL]
             .div(TOTAL_POP)
-            .mul(100000)
-            .rolling(7)
-            .mean())
+            .mul(100000))
+
+    if rolling:
+        y = y.rolling(7).mean()
 
     # whole country
 
@@ -174,7 +185,12 @@ def plot_confirmed(data, first_row=0):
 
     plt.legend(loc='upper left')
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Novos positivos / 100.000 habitantes | Média móvel de 7 dias | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Novos positivos / 100.000 habitantes | '
+    if rolling:
+        title += 'Média móvel de 7 dias | '
+    else:
+        title += 'Sem média móvel | '
+
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 

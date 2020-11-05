@@ -17,6 +17,15 @@ jobs:
         uses: actions/checkout@v2.3.1
         with:
           persist-credentials: false
+
+      - name: Cache vendored data
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: vendor-data
+
+      - name: Download COVID19 data
+        run: ./update-data.sh
           
       - name: Set up Python
         uses: actions/setup-python@v1
@@ -35,20 +44,11 @@ jobs:
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
 
-      - name: Cache vendored data
-        uses: actions/cache@v2
-        with:
-          path: vendor
-          key: vendor-data
-
       - name: Install and Build
         run: |
           pip install poetry
           poetry config virtualenvs.in-project true
           poetry install
-
-      - name: Download COVID19 data
-        run: ./update-data.sh
 
       - name: Generate charts
         run: poetry run python chart.py

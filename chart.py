@@ -87,8 +87,8 @@ def main():
     plt.savefig('output/newcases_90d_noroll.png')
 
     print('newcases_30d_noroll.png')
-    plot_confirmed(data, -30, rolling=False)
-    plt.savefig('output/newcases_30d_noroll.png')
+    plot_confirmed(data, -90, rolling=False)
+    plt.savefig('output/newcases_90d_noroll.png')
 
     print('newdeaths.png')
     plot_deaths(data)
@@ -105,6 +105,10 @@ def main():
     print('newcases_percent.png')
     plot_confirmed_percent(data)
     plt.savefig('output/newcases_percent.png')
+
+    print('newcases_percent_noroll.png')
+    plot_confirmed_percent(data, rolling=False)
+    plt.savefig('output/newcases_percent_noroll.png')
 
     print('newcases_age.png')
     plot_confirmed_ages(data)
@@ -130,7 +134,6 @@ def main():
 
 def plot_confirmed(data, first_row=0, rolling=True):
     x = data[COL_DATE]
-
     fig, ax = plot_init()
 
     last_date = data[COL_DATE].iloc[-1]
@@ -353,7 +356,7 @@ def plot_combined(data):
 
     plot_footer()
 
-def plot_confirmed_percent(data, first_row=0):
+def plot_confirmed_percent(data, first_row=0, rolling=True):
 
     last_date = data[COL_DATE].iloc[-1]
 
@@ -362,9 +365,10 @@ def plot_confirmed_percent(data, first_row=0):
     fig, ax = plot_init()
 
     y = ((data['confirmados_novos'] / data['amostras_novas'])
-            .mul(100)
-            .rolling(7)
-            .mean())
+            .mul(100))
+
+    if rolling:
+        y = y.rolling(7).mean()
 
     p = plt.plot(
         x[first_row:],
@@ -382,7 +386,11 @@ def plot_confirmed_percent(data, first_row=0):
         linewidth=1,
         alpha=1)
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de testes positivos | Média móvel de 7 dias | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de testes positivos | '
+    if rolling:
+        title += 'Média móvel de 7 dias | '
+    else:
+        title += 'Sem média móvel | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
@@ -622,6 +630,7 @@ def plot_init():
 
 def plot_footer():
     plt.figtext(0.985, 0.023, 'https://covid19.tdias.pt', horizontalalignment='right', verticalalignment='center', color='#BBBBBB')
+    plt.gca().set_ylim(bottom=0)
 
 #####
 

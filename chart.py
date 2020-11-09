@@ -416,7 +416,7 @@ def plot_confirmed_ages(data):
 
 
     # turn into percentages
-    df = df.apply(lambda r: r/r.sum(), axis=1).rolling(7).mean().mul(100)
+    df = df.apply(lambda r: r/r.sum(), axis=1).rolling(7, min_periods=1).mean().mul(100)
 
 
     plt.stackplot(x, df.transpose(), labels=labels)

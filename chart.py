@@ -134,9 +134,6 @@ def main():
     plot_tests(data)
     plt.savefig('output/tests.png')
 
-    print('heatmap.csv')
-    heatmap.main()
-
 
 def plot_confirmed(data, first_row=0, rolling=True):
     x = data[COL_DATE]

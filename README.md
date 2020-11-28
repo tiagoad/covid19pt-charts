@@ -4,7 +4,7 @@ The charts are automatically deployed to https://covid19.tdias.pt/ when the DSSG
 
 To clone/update the data, run `./update-data.sh`.
 
-Install poetry globally (`pip install poetry`), then run `poetry install` in the project directory to install all the python dependencies in a virtualenv.
+[Install poetry](https://python-poetry.org/docs/) (`curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`), then run `poetry install` in the project directory to install all the python dependencies in a virtualenv.
 
 Run `poetry shell` to enter a virtualenv shell, and run `python chart.py` to generate the charts in your project directory as PNG pictures. Alternatively, run `poetry run python ./chart.py`)
 

@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 from matplotlib.dates import FR, MO, SA, SU, TH, TU, WE
 from pylab import rcParams
 import os
+from . import heatmap
 
 DATA_FILE = 'vendor/dssg_data.csv'
 SAMPLES_FILE = 'vendor/dssg_samples.csv'
@@ -134,6 +135,8 @@ def main():
     plot_tests(data)
     plt.savefig('output/tests.png')
 
+    print('heatmap.csv')
+    heatmap.main()
 
 
 def plot_confirmed(data, first_row=0, rolling=True):
@@ -666,6 +669,14 @@ def extract_confirmed(data):
 
 
 def new(data, columns):
+    """
+    Calculates per-day values for a list of columns.
+
+    :param data: DataFrame
+    :param columns: List of column keys
+    :return: New DataFrame with new_key columns
+    """
+
     data = data.copy()
 
     for col in columns:

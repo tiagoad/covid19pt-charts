@@ -5,7 +5,6 @@ from matplotlib import pyplot as plt
 from matplotlib.dates import FR, MO, SA, SU, TH, TU, WE
 from pylab import rcParams
 import os
-from . import heatmap
 
 DATA_FILE = 'vendor/dssg_data.csv'
 SAMPLES_FILE = 'vendor/dssg_samples.csv'

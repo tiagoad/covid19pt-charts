@@ -26,6 +26,11 @@ COL_AGE = sum([[
 locale.setlocale(locale.LC_ALL, 'pt_PT.UTF-8')
 
 def main():
+    by_week()
+    by_day()
+
+
+def by_week():
     # load dssg data
     data = pd.read_csv(DATA_FILE)
     data[COL_DATE] = pd.to_datetime(
@@ -51,6 +56,31 @@ def main():
 
     # output csv
     output.to_csv('output/heatmap.csv', index=False)
+
+
+def by_day():
+    # load dssg data
+    data = pd.read_csv(DATA_FILE)
+    data[COL_DATE] = pd.to_datetime(
+        data[COL_DATE],
+        format='%d-%m-%Y %H:%M')
+    data = new(data, COL_AGE)
+
+    # extract date column
+    output_list = []
+    for i, row in data.iterrows():
+        for k, v in AGE_COLUMNS.items():
+            output_list.append([
+                row['data_dados'].strftime('%d %b %Y').upper(),
+                v,
+                row[f'new_confirmados_' + k + '_f'] + row[f'new_confirmados_' + k + '_m'],
+                row[f'new_obitos_' + k + '_f'] + row[f'new_obitos_' + k + '_m']
+            ])
+
+    output = pd.DataFrame(output_list, columns=['DIA', 'GRUPO ETÁRIO', 'CASOS_CONFIRMADOS', 'OBITOS'])
+
+    # output csv
+    output.to_csv('output/heatmap_daily.csv', index=False)
 
 
 if __name__ == '__main__':

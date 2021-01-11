@@ -5,9 +5,11 @@ from matplotlib import pyplot as plt
 from matplotlib.dates import FR, MO, SA, SU, TH, TU, WE
 from pylab import rcParams
 import os
+from datetime import datetime
 
 DATA_FILE = 'vendor/dssg_data.csv'
 SAMPLES_FILE = 'vendor/dssg_samples.csv'
+VACCINES_FILE = 'vendor/owid_vaccines.csv'
 META_FILE = 'data/regions.txt'
 GROUPS_FILE = 'data/groups.txt'
 
@@ -74,7 +76,7 @@ def main():
 
     print('Plotting charts')
 
-    print('newcases.png')
+    """print('newcases.png')
     plot_confirmed(data)
     plt.savefig('output/newcases.png')
 
@@ -132,7 +134,11 @@ def main():
 
     print('tests.png')
     plot_tests(data)
-    plt.savefig('output/tests.png')
+    plt.savefig('output/tests.png')"""
+
+    print('vaccines.png')
+    plot_vaccines(data)
+    plt.savefig('output/vaccines.png')
 
 
 def plot_confirmed(data, first_row=0, rolling=True):
@@ -563,6 +569,39 @@ def plot_active(data):
     plot_footer()
 
 
+def plot_vaccines(data):
+    fig, ax = plot_init(daily=True)
+
+    data = data.dropna(subset=['total_vaccinations'])
+    last_date = data[COL_DATE].iloc[-1]
+
+    x = data[COL_DATE]
+    y = data['total_vaccinations']
+
+    p = plt.plot(
+        x,
+        y,
+        color='#000000',
+        label='Vacinas administradas',
+        marker='o',
+        markersize=1.5)
+
+    plt.axhline(
+        y=y.iloc[-1],
+        color='#000000',
+        linestyle='solid',
+        linewidth=1,
+        alpha=1)
+
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas | '
+    title += last_date.strftime('%Y-%m-%d')
+    plt.title(title, loc='left')
+
+    plt.legend(loc='upper left')
+
+    plot_footer()
+
+
 
 def plot_tests(data):
 
@@ -615,7 +654,7 @@ def setup():
     pd.set_option('display.float_format', '{:20,.2f}'.format)
     pd.set_option('display.max_colwidth', None)
 
-def plot_init():
+def plot_init(daily=False):
     plt.clf()
     plt.style.use('default')
     rcParams["font.family"] = "Cantarell"
@@ -623,17 +662,24 @@ def plot_init():
     rcParams['axes.ymargin'] = .02
     rcParams['axes.titlesize'] = 'medium'
     fig, ax = plt.subplots(figsize=(WIDTH/DPI, HEIGHT/DPI), dpi=DPI, constrained_layout=True)
-    months = mdates.MonthLocator()
-    days = mdates.DayLocator()
-    weeks = mdates.WeekdayLocator(byweekday=MO)
-    months_fmt = mdates.DateFormatter('%m/%Y')
-    week_fmt = mdates.DateFormatter('%d/%m')
-    ax.xaxis.set_major_locator(weeks)
-    ax.xaxis.set_major_formatter(week_fmt)
-    ax.xaxis.set_minor_locator(days)
-    plt.xticks(rotation=45, fontsize=8)
-    ax.grid(axis='both', color='#000000', alpha=0.05)
-    ax.set_xlabel('semana (segunda-feira)')
+
+    if not daily:
+        days = mdates.DayLocator()
+        weeks = mdates.WeekdayLocator(byweekday=MO)
+        week_fmt = mdates.DateFormatter('%d/%m')
+        ax.xaxis.set_major_locator(weeks)
+        ax.xaxis.set_major_formatter(week_fmt)
+        ax.xaxis.set_minor_locator(days)
+        plt.xticks(rotation=45, fontsize=8)
+        ax.grid(axis='both', color='#000000', alpha=0.05)
+        ax.set_xlabel('semanas - tick a cada segunda-feira')
+    else:
+        days = mdates.DayLocator()
+        ax.xaxis.set_major_locator(days)
+        day_fmt = mdates.DateFormatter('%d/%m')
+        ax.xaxis.set_major_formatter(day_fmt)
+
+
     return fig, ax
 
 
@@ -647,12 +693,15 @@ def plot_footer():
 def load_data():
     data_main = pd.read_csv(DATA_FILE)
     samples = pd.read_csv(SAMPLES_FILE)
+    vaccines = pd.read_csv(VACCINES_FILE)
 
-    data = pd.merge(data_main, samples, how='left', on='data')
+    # change vaccines date format to DD-MM-YYYY (like DSSG)
+    vaccines['date'] = pd.to_datetime(vaccines["date"], format='%Y-%m-%d').dt.strftime('%d-%m-%Y')
 
-    data[COL_DATE] = pd.to_datetime(
-        data[COL_DATE],
-        format='%d-%m-%Y %H:%M')
+    data = pd.merge(data_main, samples, how='left', left_on='data', right_on='data')
+    data = pd.merge(data, vaccines, how='left', left_on='data', right_on='date')
+
+    data[COL_DATE] = pd.to_datetime(data_main[COL_DATE], format='%d-%m-%Y %H:%M')
 
     #print(data.iloc[-1])
     #exit()

@@ -19,6 +19,7 @@ function download() {
 # DSSG
 download https://raw.githubusercontent.com/dssg-pt/covid19pt-data/master/data.csv dssg_data.csv
 download https://raw.githubusercontent.com/dssg-pt/covid19pt-data/master/amostras.csv dssg_samples.csv
+download https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/country_data/Portugal.csv owid_vaccines.csv
 
 if [[ $new_data == 1 ]]; then
 	echo "Data changed"

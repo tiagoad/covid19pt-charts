@@ -553,13 +553,6 @@ def plot_active(data):
         marker='o',
         markersize=1.5)
 
-    plt.axhline(
-        y=y.iloc[-1],
-        color='#000000',
-        linestyle='solid',
-        linewidth=1,
-        alpha=1)
-
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Casos ativos | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
@@ -585,13 +578,6 @@ def plot_vaccines(data):
         label='Vacinas administradas',
         marker='o',
         markersize=1.5)
-
-    plt.axhline(
-        y=y.iloc[-1],
-        color='#000000',
-        linestyle='solid',
-        linewidth=1,
-        alpha=1)
 
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas (Our World in Data) | '
     title += last_date.strftime('%Y-%m-%d')

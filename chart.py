@@ -76,7 +76,7 @@ def main():
 
     print('Plotting charts')
 
-    """print('newcases.png')
+    print('newcases.png')
     plot_confirmed(data)
     plt.savefig('output/newcases.png')
 
@@ -134,7 +134,7 @@ def main():
 
     print('tests.png')
     plot_tests(data)
-    plt.savefig('output/tests.png')"""
+    plt.savefig('output/tests.png')
 
     print('vaccines.png')
     plot_vaccines(data)

@@ -61,6 +61,7 @@ COL_AGE = sum([[
 DPI = 150
 WIDTH = 1200
 HEIGHT = 675
+FIRST_WEEKDAY = 'MON'
 
 
 def main():
@@ -76,7 +77,7 @@ def main():
 
     print('Plotting charts')
 
-    print('newcases.png')
+    """print('newcases.png')
     plot_confirmed(data)
     plt.savefig('output/newcases.png')
 
@@ -134,11 +135,19 @@ def main():
 
     print('tests.png')
     plot_tests(data)
-    plt.savefig('output/tests.png')
+    plt.savefig('output/tests.png')"""
 
     print('vaccines.png')
     plot_vaccines(data)
     plt.savefig('output/vaccines.png')
+
+    print('age_heatmap_cases.png')
+    plot_age_heatmap(data, mode='cases')
+    plt.savefig('output/age_heatmap_cases.png')
+
+    print('age_heatmap_deaths.png')
+    plot_age_heatmap(data, mode='deaths')
+    plt.savefig('output/age_heatmap_deaths.png')
 
 
 def plot_confirmed(data, first_row=0, rolling=True):
@@ -585,8 +594,67 @@ def plot_vaccines(data):
 
     plt.legend(loc='upper left')
 
-    plot_footer()
+    plot_footer(top=True)
 
+
+def plot_age_heatmap(data, mode='cases'):
+    by_week = data.groupby([pd.Grouper(key=COL_DATE, freq='W-' + FIRST_WEEKDAY)]).sum()
+
+    if mode == 'cases':
+        column = 'new_confirmados'
+        title = 'Novos casos confirmados'
+    elif mode == 'deaths':
+        column = 'new_obitos'
+        title = 'Novos óbitos'
+    else:
+        return
+
+    # extract date column
+    matrix = []
+    x_labels = []
+    y_labels = list(AGE_COLUMNS.values())
+
+    for i, row in by_week.iterrows():
+        x_labels.append(i.strftime('%d/%m'))
+
+        l = []
+        for k, v in AGE_COLUMNS.items():
+            l.append(row[column + '_' + k + '_f'] + row[column + '_' + k + '_m'])
+        matrix.append(l)
+
+    matrix = np.array(matrix).transpose()
+
+    fig, ax = plot_init(nogrid=True)
+    #ax = plt.gca()
+
+    # plot heatmap
+    im = ax.imshow(matrix, aspect='auto', origin='lower', cmap='pink')
+
+    # create colorbar
+    cbar = ax.figure.colorbar(im, ax=ax, aspect=50)
+    cbar.ax.set_ylabel("", rotation=-90, va="bottom")
+
+    ax.set_xticks(np.arange(len(x_labels)))
+    ax.set_yticks(np.arange(len(y_labels)))
+    ax.set_xticklabels(x_labels)
+    ax.set_yticklabels(y_labels)
+
+    # rotate the tick labels and set their alignment.
+    plt.setp(ax.get_xticklabels(), rotation=90)
+
+    # turn spines off and create white grid.
+    for edge, spine in ax.spines.items():
+        spine.set_visible(False)
+    ax.set_xticks(np.arange(len(x_labels) + 1)-.5, minor=True)
+    ax.set_yticks(np.arange(len(y_labels) + 1)-.5, minor=True)
+    ax.grid(which="minor", color="w", linestyle='-', linewidth=1)
+    ax.tick_params(which="minor", bottom=False, left=False)
+
+    # title
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | ' + title + ', por faixa etária'
+    plt.title(title, loc='left')
+
+    plot_footer()
 
 
 def plot_tests(data):
@@ -640,7 +708,7 @@ def setup():
     pd.set_option('display.float_format', '{:20,.2f}'.format)
     pd.set_option('display.max_colwidth', None)
 
-def plot_init(daily=False):
+def plot_init(daily=False, nogrid=False):
     plt.clf()
     plt.style.use('default')
     rcParams["font.family"] = "Cantarell"
@@ -656,8 +724,6 @@ def plot_init(daily=False):
         ax.xaxis.set_major_locator(weeks)
         ax.xaxis.set_major_formatter(week_fmt)
         ax.xaxis.set_minor_locator(days)
-        plt.xticks(rotation=45, fontsize=8)
-        ax.grid(axis='both', color='#000000', alpha=0.05)
         ax.set_xlabel('semanas - tick a cada segunda-feira')
     else:
         days = mdates.DayLocator()
@@ -665,12 +731,21 @@ def plot_init(daily=False):
         day_fmt = mdates.DateFormatter('%d/%m')
         ax.xaxis.set_major_formatter(day_fmt)
 
+    plt.xticks(rotation=45, fontsize=8)
+    if not nogrid:
+        ax.grid(axis='both', color='#000000', alpha=0.05)
+
 
     return fig, ax
 
 
-def plot_footer():
-    plt.figtext(0.985, 0.023, 'https://covid19.tdias.pt', horizontalalignment='right', verticalalignment='center', color='#BBBBBB')
+def plot_footer(top=False):
+    if top:
+        x, y = 0.985, 0.975
+    else:
+        x, y = 0.985, 0.023
+
+    plt.figtext(x, y, 'https://covid19.tdias.pt', horizontalalignment='right', verticalalignment='center', color='#BBBBBB')
     plt.gca().set_ylim(bottom=0)
 
 #####

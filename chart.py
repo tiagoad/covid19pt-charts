@@ -651,7 +651,7 @@ def plot_age_heatmap(data, mode='cases'):
     ax.tick_params(which="minor", bottom=False, left=False)
 
     # title
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | ' + title + ', por faixa etária'
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | ' + title + ' por semana, por faixa etária'
     plt.title(title, loc='left')
 
     plot_footer()

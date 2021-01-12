@@ -628,7 +628,7 @@ def plot_age_heatmap(data, mode='cases'):
     #ax = plt.gca()
 
     # plot heatmap
-    im = ax.imshow(matrix, aspect='auto', origin='lower', cmap='YlOrBr')
+    im = ax.imshow(matrix, aspect='auto', origin='lower', cmap='turbo')
 
     # create colorbar
     cbar = ax.figure.colorbar(im, ax=ax, aspect=50)

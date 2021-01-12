@@ -598,6 +598,7 @@ def plot_vaccines(data):
 
 
 def plot_age_heatmap(data, mode='cases'):
+    last_date = data[COL_DATE].iloc[-1]
     by_week = data.groupby([pd.Grouper(key=COL_DATE, freq='W-' + LAST_WEEKDAY)]).sum()
 
     if mode == 'cases':
@@ -617,9 +618,18 @@ def plot_age_heatmap(data, mode='cases'):
     for i, row in by_week.iterrows():
         x_labels.append((i - pd.Timedelta(pd.offsets.Day(6))).strftime('%d/%m'))
 
+        # days in week so far
+        days_in_week = (last_date - (i - pd.Timedelta(pd.offsets.Day(7)))).days
+
         l = []
         for k, v in AGE_COLUMNS.items():
-            l.append(row[column + '_' + k + '_f'] + row[column + '_' + k + '_m'])
+            v = row[column + '_' + k + '_f'] + row[column + '_' + k + '_m']
+
+            if i == by_week.index[-1]:
+                v = (v / days_in_week) * 7
+
+            l.append(v)
+
         matrix.append(l)
 
     matrix = np.array(matrix).transpose()
@@ -651,7 +661,7 @@ def plot_age_heatmap(data, mode='cases'):
     ax.tick_params(which="minor", bottom=False, left=False)
 
     # title
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | ' + title + ' por semana, por faixa etária'
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | ' + title + ' por semana, por faixa etária (última semana ajustada)'
     plt.title(title, loc='left')
 
     plot_footer(zero_origin=False)

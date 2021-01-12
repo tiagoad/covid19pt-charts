@@ -654,7 +654,7 @@ def plot_age_heatmap(data, mode='cases'):
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | ' + title + ' por semana, por faixa etária'
     plt.title(title, loc='left')
 
-    plot_footer()
+    plot_footer(zero_origin=False)
 
 
 def plot_tests(data):
@@ -739,14 +739,16 @@ def plot_init(daily=False, nogrid=False):
     return fig, ax
 
 
-def plot_footer(top=False):
+def plot_footer(top=False, zero_origin=True):
     if top:
         x, y = 0.985, 0.975
     else:
         x, y = 0.985, 0.023
 
     plt.figtext(x, y, 'https://covid19.tdias.pt', horizontalalignment='right', verticalalignment='center', color='#BBBBBB')
-    plt.gca().set_ylim(bottom=0)
+
+    if zero_origin:
+        plt.gca().set_ylim(bottom=0)
 
 #####
 

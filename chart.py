@@ -150,6 +150,11 @@ def main():
     plt.savefig('output/age_heatmap_deaths.png')
 
 
+    print('newdeaths_national.png')
+    plot_deaths_national(data)
+    plt.savefig('output/newdeaths_national.png')
+
+
 def plot_confirmed(data, first_row=0, rolling=True):
     x = data[COL_DATE]
     fig, ax = plot_init()
@@ -709,6 +714,32 @@ def plot_tests(data):
     plt.title(title, loc='left')
 
     plot_footer()
+
+
+def plot_deaths_national(data):
+    fig, ax = plot_init()
+
+    last_date = data[COL_DATE].iloc[-1]
+
+    x = data[COL_DATE]
+    y = data['new_obitos']
+
+    p = plt.plot(
+        x,
+        y,
+        color='#000000',
+        label='Óbitos diários',
+        marker='o',
+        markersize=1.5)
+
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Óbitos por dia | '
+    title += last_date.strftime('%Y-%m-%d')
+    plt.title(title, loc='left')
+
+    plt.legend(loc='upper left')
+
+    plot_footer(top=True)
+
 #####
 
 def setup():
@@ -734,7 +765,7 @@ def plot_init(daily=False, nogrid=False):
         ax.xaxis.set_major_locator(weeks)
         ax.xaxis.set_major_formatter(week_fmt)
         ax.xaxis.set_minor_locator(days)
-        ax.set_xlabel('semanas - tick a cada segunda-feira')
+        ax.set_xlabel('dias (marca a cada segunda-feira)')
     else:
         days = mdates.DayLocator()
         ax.xaxis.set_major_locator(days)

@@ -61,7 +61,7 @@ COL_AGE = sum([[
 DPI = 150
 WIDTH = 1200
 HEIGHT = 675
-FIRST_WEEKDAY = 'MON'
+LAST_WEEKDAY = 'SUN'
 
 
 def main():
@@ -598,7 +598,7 @@ def plot_vaccines(data):
 
 
 def plot_age_heatmap(data, mode='cases'):
-    by_week = data.groupby([pd.Grouper(key=COL_DATE, freq='W-' + FIRST_WEEKDAY)]).sum()
+    by_week = data.groupby([pd.Grouper(key=COL_DATE, freq='W-' + LAST_WEEKDAY)]).sum()
 
     if mode == 'cases':
         column = 'new_confirmados'
@@ -615,7 +615,7 @@ def plot_age_heatmap(data, mode='cases'):
     y_labels = list(AGE_COLUMNS.values())
 
     for i, row in by_week.iterrows():
-        x_labels.append(i.strftime('%d/%m'))
+        x_labels.append((i - pd.Timedelta(pd.offsets.Day(6))).strftime('%d/%m'))
 
         l = []
         for k, v in AGE_COLUMNS.items():

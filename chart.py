@@ -77,7 +77,7 @@ def main():
 
     print('Plotting charts')
 
-    """print('newcases.png')
+    print('newcases.png')
     plot_confirmed(data)
     plt.savefig('output/newcases.png')
 
@@ -135,7 +135,7 @@ def main():
 
     print('tests.png')
     plot_tests(data)
-    plt.savefig('output/tests.png')"""
+    plt.savefig('output/tests.png')
 
     print('vaccines.png')
     plot_vaccines(data)
@@ -628,7 +628,7 @@ def plot_age_heatmap(data, mode='cases'):
     #ax = plt.gca()
 
     # plot heatmap
-    im = ax.imshow(matrix, aspect='auto', origin='lower', cmap='pink')
+    im = ax.imshow(matrix, aspect='auto', origin='lower', cmap='YlOrBr')
 
     # create colorbar
     cbar = ax.figure.colorbar(im, ax=ax, aspect=50)

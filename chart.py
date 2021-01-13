@@ -689,29 +689,13 @@ def plot_tests(data):
         marker='o',
         markersize=1.5)
 
-    ax2 = ax1.twinx()
-
-    y = data['confirmados_novos'].rolling(7).mean()
-    p2 = ax2.plot(
-        x,
-        y,
-        label='Testes positivos',
-        color='#DD0000',
-        marker='o',
-        markersize=1.5)
-    ax2.tick_params(axis='y', labelcolor=p2[0].get_color())
-
-
     ####
-
-    # legend
-    lns = p1 + p2
-    labs = [l.get_label() for l in lns]
-    ax1.legend(lns, labs, loc='upper left')
 
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Testes por dia | Média móvel de 7 dias | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
+
+    plt.legend(loc='upper left')
 
     plot_footer()
 

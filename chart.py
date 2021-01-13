@@ -754,7 +754,7 @@ def plot_genders(data, mode='cases'):
             f += row[column + '_' + k + '_f']
             m += row[column + '_' + k + '_m']
         gender_data.append([f, m])
-    gender_data = pd.DataFrame(gender_data, columns=['female', 'male'])
+    gender_data = pd.DataFrame(gender_data, columns=['female', 'male']).fillna(method='backfill')
 
     x = data[COL_DATE]
 

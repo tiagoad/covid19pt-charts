@@ -149,10 +149,17 @@ def main():
     plot_age_heatmap(data, mode='deaths')
     plt.savefig('output/age_heatmap_deaths.png')
 
-
     print('newdeaths_national.png')
     plot_deaths_national(data)
     plt.savefig('output/newdeaths_national.png')
+
+    print('newcases_genders.png')
+    plot_genders(data, mode='cases')
+    plt.savefig('output/newcases_genders.png')
+
+    print('newdeaths_genders.png')
+    plot_genders(data, mode='deaths')
+    plt.savefig('output/newdeaths_genders.png')
 
 
 def plot_confirmed(data, first_row=0, rolling=True):
@@ -717,6 +724,59 @@ def plot_deaths_national(data):
         markersize=1.5)
 
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Óbitos por dia | '
+    title += last_date.strftime('%Y-%m-%d')
+    plt.title(title, loc='left')
+
+    plt.legend(loc='upper left')
+
+    plot_footer(top=True)
+
+
+def plot_genders(data, mode='cases'):
+    if mode == 'cases':
+        column = 'new_confirmados'
+        title = 'Novos casos confirmados'
+    elif mode == 'deaths':
+        column = 'new_obitos'
+        title = 'Novos óbitos'
+    else:
+        return
+
+    fig, ax = plot_init()
+
+    last_date = data[COL_DATE].iloc[-1]
+
+    # sum ages for each gender
+    gender_data = []
+    for i, row in data.iterrows():
+        f, m = 0, 0
+        for k, v in AGE_COLUMNS.items():
+            f += row[column + '_' + k + '_f']
+            m += row[column + '_' + k + '_m']
+        gender_data.append([f, m])
+    gender_data = pd.DataFrame(gender_data, columns=['female', 'male'])
+
+    x = data[COL_DATE]
+
+    plt.plot(
+        x,
+        gender_data['female']
+            .rolling(7)
+            .mean(),
+        label='Feminino',
+        marker='o',
+        markersize=1.5)
+
+    plt.plot(
+        x,
+        gender_data['male']
+            .rolling(7)
+            .mean(),
+        label='Masculino',
+        marker='o',
+        markersize=1.5)
+
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | ' + title + ' por sexo | Média móvel de 7 dias | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 

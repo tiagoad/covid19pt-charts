@@ -77,6 +77,14 @@ def main():
 
     print('Plotting charts')
 
+    print('newcases_genders.png')
+    plot_genders(data, mode='cases')
+    plt.savefig('output/newcases_genders.png')
+
+    print('newdeaths_genders.png')
+    plot_genders(data, mode='deaths')
+    plt.savefig('output/newdeaths_genders.png')
+
     print('newcases.png')
     plot_confirmed(data)
     plt.savefig('output/newcases.png')
@@ -150,16 +158,13 @@ def main():
     plt.savefig('output/age_heatmap_deaths.png')
 
     print('newdeaths_national.png')
-    plot_deaths_national(data)
+    plot_national(data, mode='deaths')
     plt.savefig('output/newdeaths_national.png')
 
-    print('newcases_genders.png')
-    plot_genders(data, mode='cases')
-    plt.savefig('output/newcases_genders.png')
+    print('newcases_national.png')
+    plot_national(data, mode='cases')
+    plt.savefig('output/newcases_national.png')
 
-    print('newdeaths_genders.png')
-    plot_genders(data, mode='deaths')
-    plt.savefig('output/newdeaths_genders.png')
 
 
 def plot_confirmed(data, first_row=0, rolling=True):
@@ -392,6 +397,7 @@ def plot_combined(data):
 
     plot_footer()
 
+
 def plot_confirmed_percent(data, first_row=0, rolling=True):
 
     last_date = data[COL_DATE].iloc[-1]
@@ -413,14 +419,7 @@ def plot_confirmed_percent(data, first_row=0, rolling=True):
         marker='o',
         markersize=1.5,
         label='Testes positivos (%)')
-
-
-    plt.axhline(
-        y=y.iloc[-1],
-        color='#000000',
-        linestyle='solid',
-        linewidth=1,
-        alpha=1)
+    plot_latest(p)
 
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de testes positivos | '
     if rolling:
@@ -523,12 +522,7 @@ def plot_hospital(data):
         color='#000000',
         marker='o',
         markersize=1.5)
-    plt.axhline(
-        y=y.iloc[-1],
-        color=p[0].get_color(),
-        linestyle='solid',
-        linewidth=1,
-        alpha=0.7)
+    plot_latest(p)
 
     y = data['internados_uci']
     p = plt.plot(
@@ -538,12 +532,7 @@ def plot_hospital(data):
         color='#DD0000',
         marker='o',
         markersize=1.5)
-    plt.axhline(
-        y=y.iloc[-1],
-        color=p[0].get_color(),
-        linestyle='solid',
-        linewidth=1,
-        alpha=0.7)
+    plot_latest(p)
 
     ####
 
@@ -707,23 +696,33 @@ def plot_tests(data):
     plot_footer()
 
 
-def plot_deaths_national(data):
+def plot_national(data, mode):
+    if mode == 'cases':
+        column = 'confirmados_novos'
+        title = 'Novos casos confirmados'
+    elif mode == 'deaths':
+        column = 'new_obitos'
+        title = 'Novos óbitos'
+    else:
+        return
+
     fig, ax = plot_init()
 
     last_date = data[COL_DATE].iloc[-1]
 
     x = data[COL_DATE]
-    y = data['new_obitos']
+    y = data[column]
 
     p = plt.plot(
         x,
         y,
         color='#000000',
-        label='Óbitos diários',
+        label=title,
         marker='o',
         markersize=1.5)
+    plot_latest(p)
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Óbitos por dia | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | ' + title + ' | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
@@ -886,6 +885,22 @@ def new(data, columns):
 
 def region_new(data, prefix):
     return new(data, [prefix + k for k in REGION_COLUMNS.keys()])
+
+
+def plot_latest(p):
+    #last_x = p[0].get_xdata()[-1]
+    last_y = [v for v in p[0].get_ydata() if v > 0][-1]
+
+    plt.axhline(
+        y=last_y,
+        color=p[0].get_color(),
+        linestyle='solid',
+        linewidth=1,
+        alpha=0.7)
+
+    yticks = list(plt.yticks()[0])
+    max_ytick = max(yticks)
+    plt.yticks([v for v in yticks if abs(last_y-v) > (0.04 * max_ytick)] + [last_y])
 
 if __name__ == '__main__':
     main()

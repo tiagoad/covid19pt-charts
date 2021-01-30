@@ -9,7 +9,7 @@ from datetime import datetime
 
 DATA_FILE = 'vendor/dssg_data.csv'
 SAMPLES_FILE = 'vendor/dssg_samples.csv'
-VACCINES_FILE = 'vendor/owid_vaccines.csv'
+VACCINES_FILE = 'vendor/dssg_vaccines.csv'
 META_FILE = 'data/regions.txt'
 GROUPS_FILE = 'data/groups.txt'
 
@@ -573,13 +573,15 @@ def plot_active(data):
 
 
 def plot_vaccines(data):
+    # remove nan rows
+    data = data.dropna(subset=['doses'])
+
     fig, ax = plot_init(daily=True)
 
-    data = data.dropna(subset=['total_vaccinations'])
     last_date = data[COL_DATE].iloc[-1]
 
     x = data[COL_DATE]
-    y = data['total_vaccinations']
+    y = data['doses']
 
     p = plt.plot(
         x,
@@ -635,7 +637,7 @@ def plot_age_heatmap(data, mode='cases'):
 
     matrix = np.array(matrix).transpose()
 
-    fig, ax = plot_init(nogrid=True)
+    fig, ax = plot_init(nogrid=True, tick_left=True)
     #ax = plt.gca()
 
     # plot heatmap
@@ -677,17 +679,38 @@ def plot_tests(data):
     fig, ax1 = plot_init()
 
     y = data['amostras_novas'].rolling(7).mean()
-    p1 = ax1.plot(
+    p = ax1.plot(
         x,
         y,
-        label='Testes realizados',
+        label='Amostras processadas',
         color='#000000',
         marker='o',
         markersize=1.5)
+    plot_latest(p)
+
+    y = data['amostras_pcr_novas'].rolling(7).mean()
+    p = ax1.plot(
+        x,
+        y,
+        label='Amostras PCR',
+        marker='o',
+        markersize=1.5)
+    plot_latest(p)
+
+
+    y = data['amostras_antigenio_novas'].rolling(7).mean()
+    p = ax1.plot(
+        x,
+        y,
+        label='Amostras antigénio',
+        marker='o',
+        markersize=1.5)
+    plot_latest(p)
+
 
     ####
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Testes por dia | Média móvel de 7 dias | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Novas amostras por dia | Média móvel de 7 dias | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
@@ -842,11 +865,17 @@ def load_data():
     samples = pd.read_csv(SAMPLES_FILE)
     vaccines = pd.read_csv(VACCINES_FILE)
 
-    # change vaccines date format to DD-MM-YYYY (like DSSG)
-    vaccines['date'] = pd.to_datetime(vaccines["date"], format='%Y-%m-%d').dt.strftime('%d-%m-%Y')
+    # change OWID vaccines date format to DD-MM-YYYY (like DSSG)
+    # vaccines['date'] = pd.to_datetime(vaccines["date"], format='%Y-%m-%d').dt.strftime('%d-%m-%Y')
+    # data = pd.merge(data, vaccines, how='left', left_on='data', right_on='date')
 
-    data = pd.merge(data_main, samples, how='left', left_on='data', right_on='data')
-    data = pd.merge(data, vaccines, how='left', left_on='data', right_on='date')
+    data = data_main
+    data = pd.merge(data, samples, how='left', left_on='data', right_on='data')
+    data = pd.merge(data, vaccines, how='left', left_on='data', right_on='data')
+
+
+    #print(data.head())
+    print(samples.head())
 
     data[COL_DATE] = pd.to_datetime(data_main[COL_DATE], format='%d-%m-%Y %H:%M')
 

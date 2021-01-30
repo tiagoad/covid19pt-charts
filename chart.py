@@ -439,7 +439,7 @@ def plot_confirmed_ages(data):
 
     x = data[COL_DATE]
 
-    fig, ax = plot_init()
+    fig, ax = plot_init(tick_left=True)
 
     df = pd.DataFrame()
     labels = []
@@ -475,7 +475,7 @@ def plot_deaths_age(data):
 
     x = data[COL_DATE]
 
-    fig, ax = plot_init()
+    fig, ax = plot_init(tick_left=True)
 
     df = pd.DataFrame()
     labels = []
@@ -815,7 +815,7 @@ def setup():
     pd.set_option('display.float_format', '{:20,.2f}'.format)
     pd.set_option('display.max_colwidth', None)
 
-def plot_init(daily=False, nogrid=False):
+def plot_init(daily=False, nogrid=False, tick_left=False):
     plt.clf()
     plt.style.use('default')
     rcParams["font.family"] = "Cantarell"
@@ -823,6 +823,9 @@ def plot_init(daily=False, nogrid=False):
     rcParams['axes.ymargin'] = .02
     rcParams['axes.titlesize'] = 'medium'
     fig, ax = plt.subplots(figsize=(WIDTH/DPI, HEIGHT/DPI), dpi=DPI, constrained_layout=True)
+
+    if not tick_left:
+        ax.yaxis.tick_right()
 
     if not daily:
         days = mdates.DayLocator()

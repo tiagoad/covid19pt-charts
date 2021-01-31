@@ -591,7 +591,7 @@ def plot_vaccines(data):
         marker='o',
         markersize=1.5)
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas (Our World in Data) | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 

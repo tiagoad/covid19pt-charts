@@ -149,6 +149,10 @@ def main():
     plot_vaccines(data)
     plt.savefig('output/vaccines.png')
 
+    print('vaccines_daily.png')
+    plot_vaccines(data, daily=True)
+    plt.savefig('output/vaccines_daily.png')
+
     print('age_heatmap_cases.png')
     plot_age_heatmap(data, mode='cases')
     plt.savefig('output/age_heatmap_cases.png')
@@ -572,7 +576,7 @@ def plot_active(data):
     plot_footer()
 
 
-def plot_vaccines(data):
+def plot_vaccines(data, daily=False):
     # remove nan rows
     data = data.dropna(subset=['doses'])
 
@@ -580,18 +584,38 @@ def plot_vaccines(data):
 
     last_date = data[COL_DATE].iloc[-1]
 
-    x = data[COL_DATE]
-    y = data['doses']
-
-    p = plt.plot(
-        x,
+    y = data['doses1' + ('_novas' if daily else '')]
+    if daily:
+        y = y.rolling(7, min_periods=1).mean()
+    plt.plot(
+        data[COL_DATE],
         y,
-        color='#000000',
-        label='Vacinas administradas',
+        label='Vacinas (1ª dose)' + (' / dia' if daily else ''),
         marker='o',
         markersize=1.5)
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas | '
+    y = data['doses2' + ('_novas' if daily else '')]
+    if daily:
+        y = y.rolling(7, min_periods=1).mean()
+    plt.plot(
+        data[COL_DATE],
+        y,
+        label='Vacinas (2ª dose)' + (' / dia' if daily else ''),
+        marker='o',
+        markersize=1.5)
+
+    y = data['doses' + ('_novas' if daily else '')]
+    if daily:
+        y = y.rolling(7, min_periods=1).mean()
+    plt.plot(
+        data[COL_DATE],
+        y,
+        color='#000000',
+        label='Vacinas (total)' + (' / dia' if daily else ''),
+        marker='o',
+        markersize=1.5)
+
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas' + (' por dia (Média móvel de 7 dias)' if daily else '') + ' | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 

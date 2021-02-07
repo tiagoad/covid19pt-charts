@@ -615,7 +615,7 @@ def plot_vaccines(data, daily=False):
         marker='o',
         markersize=1.5)
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas' + (' por dia (Média móvel de 7 dias)' if daily else '') + ' | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas' + (' por dia | Média móvel de 7 dias' if daily else '') + ' | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 

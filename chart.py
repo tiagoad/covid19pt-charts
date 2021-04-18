@@ -580,13 +580,11 @@ def plot_vaccines(data, daily=False):
     # remove nan rows
     data = data.dropna(subset=['doses'])
 
-    fig, ax = plot_init(daily=True)
+    fig, ax = plot_init()
 
     last_date = data[COL_DATE].iloc[-1]
 
     y = data['doses1' + ('_novas' if daily else '')]
-    if daily:
-        y = y.rolling(7, min_periods=1).mean()
     plt.plot(
         data[COL_DATE],
         y,
@@ -595,8 +593,6 @@ def plot_vaccines(data, daily=False):
         markersize=1.5)
 
     y = data['doses2' + ('_novas' if daily else '')]
-    if daily:
-        y = y.rolling(7, min_periods=1).mean()
     plt.plot(
         data[COL_DATE],
         y,
@@ -605,8 +601,6 @@ def plot_vaccines(data, daily=False):
         markersize=1.5)
 
     y = data['doses' + ('_novas' if daily else '')]
-    if daily:
-        y = y.rolling(7, min_periods=1).mean()
     plt.plot(
         data[COL_DATE],
         y,
@@ -615,7 +609,7 @@ def plot_vaccines(data, daily=False):
         marker='o',
         markersize=1.5)
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas' + (' por dia | Média móvel de 7 dias' if daily else '') + ' | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas' + (' por dia' if daily else '') + ' | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
@@ -677,7 +671,7 @@ def plot_age_heatmap(data, mode='cases'):
     ax.set_yticklabels(y_labels)
 
     # rotate the tick labels and set their alignment.
-    plt.setp(ax.get_xticklabels(), rotation=90)
+    plt.setp(ax.get_xticklabels(), rotation=90, fontsize=7)
 
     # turn spines off and create white grid.
     for edge, spine in ax.spines.items():
@@ -858,14 +852,14 @@ def plot_init(daily=False, nogrid=False, tick_left=False):
         ax.xaxis.set_major_locator(weeks)
         ax.xaxis.set_major_formatter(week_fmt)
         ax.xaxis.set_minor_locator(days)
-        ax.set_xlabel('dias (marca a cada segunda-feira)')
+        ax.set_xlabel('semana (2ªf)')
     else:
         days = mdates.DayLocator()
         ax.xaxis.set_major_locator(days)
         day_fmt = mdates.DateFormatter('%d/%m')
         ax.xaxis.set_major_formatter(day_fmt)
 
-    plt.xticks(rotation=45, fontsize=8)
+    plt.xticks(rotation=90, fontsize=7)
     if not nogrid:
         ax.grid(axis='both', color='#000000', alpha=0.05)
 

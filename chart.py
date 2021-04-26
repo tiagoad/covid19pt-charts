@@ -403,14 +403,13 @@ def plot_combined(data):
 
 
 def plot_confirmed_percent(data, first_row=0, rolling=True):
-
     last_date = data[COL_DATE].iloc[-1]
 
     x = data[COL_DATE]
 
     fig, ax = plot_init()
 
-    y = ((data['confirmados_novos'] / data['amostras_novas'])
+    y = ((data['confirmados_novos'] / (data['amostras_pcr_novas'] + data['amostras_antigenio_novas']))
             .mul(100))
 
     if rolling:
@@ -696,7 +695,7 @@ def plot_tests(data):
 
     fig, ax1 = plot_init()
 
-    y = data['amostras_novas'].rolling(7).mean()
+    y = (data['amostras_pcr_novas'] + data['amostras_antigenio_novas']).rolling(7).mean()
     p = ax1.plot(
         x,
         y,
@@ -894,14 +893,7 @@ def load_data():
     data = pd.merge(data, samples, how='left', left_on='data', right_on='data')
     data = pd.merge(data, vaccines, how='left', left_on='data', right_on='data')
 
-
-    #print(data.head())
-    print(samples.head())
-
     data[COL_DATE] = pd.to_datetime(data_main[COL_DATE], format='%d-%m-%Y %H:%M')
-
-    #print(data.iloc[-1])
-    #exit()
 
     return data
 

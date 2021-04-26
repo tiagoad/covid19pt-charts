@@ -422,7 +422,7 @@ def plot_confirmed_percent(data, first_row=0, rolling=True):
         marker='o',
         markersize=1.5,
         label='Testes positivos (%)')
-    plot_latest(p)
+    plot_axhline(p)
 
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Percentagem de testes positivos | '
     if rolling:
@@ -525,7 +525,7 @@ def plot_hospital(data):
         color='#000000',
         marker='o',
         markersize=1.5)
-    plot_latest(p)
+    plot_axhline(p)
 
     y = data['internados_uci']
     p = plt.plot(
@@ -535,7 +535,7 @@ def plot_hospital(data):
         color='#DD0000',
         marker='o',
         markersize=1.5)
-    plot_latest(p)
+    plot_axhline(p)
 
     ####
 
@@ -584,31 +584,34 @@ def plot_vaccines(data, daily=False):
     last_date = data[COL_DATE].iloc[-1]
 
     y = data['doses1' + ('_novas' if daily else '')]
-    plt.plot(
+    p = plt.plot(
         data[COL_DATE],
         y,
         label='Vacinas (1ª dose)' + (' / dia' if daily else ''),
         marker='o',
         markersize=1.5)
+    plot_axhline(p, mode='max' if daily else 'latest')
 
     y = data['doses2' + ('_novas' if daily else '')]
-    plt.plot(
+    p = plt.plot(
         data[COL_DATE],
         y,
         label='Vacinas (2ª dose)' + (' / dia' if daily else ''),
         marker='o',
         markersize=1.5)
+    plot_axhline(p, mode='max' if daily else 'latest')
 
     y = data['doses' + ('_novas' if daily else '')]
-    plt.plot(
+    p = plt.plot(
         data[COL_DATE],
         y,
         color='#000000',
         label='Vacinas (total)' + (' / dia' if daily else ''),
         marker='o',
         markersize=1.5)
+    plot_axhline(p, mode='max' if daily else 'latest')
 
-    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas' + (' por dia' if daily else '') + ' | '
+    title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | Vacinas' + (' por dia (linhas nos picos)' if daily else ' ') + ' | '
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
@@ -703,7 +706,7 @@ def plot_tests(data):
         color='#000000',
         marker='o',
         markersize=1.5)
-    plot_latest(p)
+    plot_axhline(p)
 
     y = data['amostras_pcr_novas'].rolling(7).mean()
     p = ax1.plot(
@@ -712,7 +715,7 @@ def plot_tests(data):
         label='Amostras PCR',
         marker='o',
         markersize=1.5)
-    plot_latest(p)
+    plot_axhline(p)
 
 
     y = data['amostras_antigenio_novas'].rolling(7).mean()
@@ -722,7 +725,7 @@ def plot_tests(data):
         label='Amostras antigénio',
         marker='o',
         markersize=1.5)
-    plot_latest(p)
+    plot_axhline(p)
 
 
     ####
@@ -760,7 +763,7 @@ def plot_national(data, mode):
         label=title,
         marker='o',
         markersize=1.5)
-    plot_latest(p)
+    plot_axhline(p)
 
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | ' + title + ' | '
     title += last_date.strftime('%Y-%m-%d')
@@ -929,12 +932,19 @@ def region_new(data, prefix):
     return new(data, [prefix + k for k in REGION_COLUMNS.keys()])
 
 
-def plot_latest(p):
+def plot_axhline(p, mode='latest'):
     #last_x = p[0].get_xdata()[-1]
-    last_y = [v for v in p[0].get_ydata() if v > 0][-1]
+
+    marked_y = None
+    if mode == 'latest':
+        marked_y = [v for v in p[0].get_ydata() if v > 0][-1]
+    elif mode == 'max':
+        marked_y = max([v for v in p[0].get_ydata() if v > 0])
+    else:
+        raise Exception('Unknown mode %s' % mode)
 
     plt.axhline(
-        y=last_y,
+        y=marked_y,
         color=p[0].get_color(),
         linestyle='solid',
         linewidth=1,
@@ -942,7 +952,7 @@ def plot_latest(p):
 
     yticks = list(plt.yticks()[0])
     max_ytick = max(yticks)
-    plt.yticks([v for v in yticks if abs(last_y-v) > (0.04 * max_ytick)] + [last_y])
+    plt.yticks([v for v in yticks if abs(marked_y-v) > (0.04 * max_ytick)] + [marked_y])
 
 if __name__ == '__main__':
     main()

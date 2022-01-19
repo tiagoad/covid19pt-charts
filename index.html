@@ -1,105 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8"/>
-		<title>#COVID19PT - Gráficos</title>
-		<style type="text/css">
-			html, body {
-				background: #ddd;
-				margin: 0 !important;
-				padding: 0 !important;
+  <head>
+    <meta charset="utf-8" />
+    <title>#COVID19PT - Gráficos</title>
+    <style type="text/css">
+      html,
+      body {
+        background: #ddd;
+        margin: 0 !important;
+        padding: 0 !important;
 
-				box-sizing: border-box;
+        box-sizing: border-box;
+      }
 
-			}
+      #container {
+        font-family: Helvetica, Arial, sans-serif;
+        background-color: #fff;
 
-			#container {
-				font-family: Helvetica, Arial, sans-serif;
-				background-color: #fff;
+        max-width: 800px;
+        padding: 1px 3em;
+        margin: 0 auto;
+      }
 
-				max-width: 800px;
-				padding: 1px 3em;
-				margin: 0 auto;
+      img {
+        width: 100%;
+      }
 
-			}
+      hr {
+        border: 1px solid #999;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>COVID19 em gráficos - Portugal</h1>
 
-			img {
-				width: 100%;
-			}
+      <p>
+        Esta página contém alguns gráficos que acho interessantes, gerados a
+        partir dos
+        <a href="https://github.com/dssg-pt/covid19pt-data">dados da DSSG-PT</a
+        >, recolhidos manualmente pela Data Science for Good dos relatórios da
+        DGS.
+      </p>
 
-			hr {
-				border: 1px solid #999;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="container">
-            <h1>COVID19 em gráficos - Portugal</h1>
+      <p>
+        O código está disponível em
+        <a href="https://github.com/tiagoad/covid19pt-charts"
+          >https://github.com/tiagoad/covid19pt-charts</a
+        >.
+      </p>
 
-			<p>
-				Esta página contém alguns gráficos que acho interessantes, gerados a partir dos 
-				<a href="https://github.com/dssg-pt/covid19pt-data">dados da DSSG-PT</a>, recolhidos manualmente
-				pela Data Science for Good dos relatórios da DGS.
-			</p>
+      <p>
+        Por qualquer motivo, contactem-me por email:
+        <a href="mailto:tiago@tdias.tech">tiago@tdias.pt</a>
+      </p>
 
-			<p>
-				O código está disponível em 
-				<a href="https://github.com/tiagoad/covid19pt-charts">https://github.com/tiagoad/covid19pt-charts</a>.
-			</p>
+      <hr />
 
-			<p>
-				Por qualquer motivo, contactem-me por email: <a href="mailto:tiago@tdias.tech">tiago@tdias.pt</a>
-			</p>
+      <h2>Vacinas</h2>
 
-			<hr/>
+      <img src="output/vaccines.png" />
+      <img src="output/vaccines_daily.png" />
 
-            <h2>Vacinas</h2>
+      <h2>Novos confirmados</h2>
 
-            <img src="output/vaccines.png" />
-            <img src="output/vaccines_daily.png" />
+      <img src="output/newcases_national.png" />
+      <img src="output/newcases.png" />
+      <img src="output/newcases_90d.png" />
+      <img src="output/age_heatmap_cases.png" />
+      <img src="output/newcases_age.png" />
+      <img src="output/newcases_genders.png" />
 
-            <h2>Novos confirmados</h2>
+      <h2>Novos óbitos</h2>
 
-            <img src="output/newcases_national.png" />
-			<img src="output/newcases.png" />
-			<img src="output/newcases_90d.png" />
-            <img src="output/age_heatmap_cases.png" />
-			<img src="output/newcases_age.png" />
-            <img src="output/newcases_genders.png" />
+      <img src="output/newdeaths_national.png" />
+      <img src="output/newdeaths.png" />
+      <img src="output/newdeaths_90d.png" />
+      <img src="output/age_heatmap_deaths.png" />
+      <img src="output/newdeaths_age.png" />
+      <img src="output/newdeaths_genders.png" />
 
-			<h2>Novos óbitos</h2>
+      <h2>Hospitalizações</h2>
 
-            <img src="output/newdeaths_national.png" />
-            <img src="output/newdeaths.png" />
-			<img src="output/newdeaths_90d.png" />
-            <img src="output/age_heatmap_deaths.png" />
-			<img src="output/newdeaths_age.png" />
-            <img src="output/newdeaths_genders.png" />
+      <img src="output/hospital.png" />
+      <img src="output/hospital_90d.png" />
 
-			<h2>Hospitalizações</h2>
+      <h2>Casos ativos</h2>
 
-			<img src="output/hospital.png" />
+      <img src="output/active.png" />
 
-			<h2>Casos ativos</h2>
+      <h2>Testes</h2>
 
-			<img src="output/active.png" />
+      <img src="output/tests.png" />
+      <img src="output/newcases_percent.png" />
 
-            <h2>Testes</h2>
+      <hr />
 
-            <img src="output/tests.png" />
-            <img src="output/newcases_percent.png" />
-
-			<hr/>
-
-			<script src="https://utteranc.es/client.js"
-				repo="tiagoad/covid19pt-charts"
-				issue-term="pathname"
-				label="Comments"
-				theme="github-light"
-				crossorigin="anonymous"
-				async>
-			</script>
-		</div>
-
-		</body>
+      <script
+        src="https://utteranc.es/client.js"
+        repo="tiagoad/covid19pt-charts"
+        issue-term="pathname"
+        label="Comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async
+      ></script>
+    </div>
+  </body>
 </html>

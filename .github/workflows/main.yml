@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ${process.env.HOME}/.cache/pip
+            ~/.cache/pip
             .venv
 
           key: pip-${{ hashFiles('pyproject.toml') }}

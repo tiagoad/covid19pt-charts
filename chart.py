@@ -583,30 +583,30 @@ def plot_vaccines(data, daily=False):
 
     last_date = data[COL_DATE].iloc[-1]
 
-    y = data['doses1' + ('_novas' if daily else '')]
+    y = data['pessoas_vacinadas_completamente' + ('_novas' if daily else '')]
     p = plt.plot(
         data[COL_DATE],
         y,
-        label='Vacinas (1ª dose)' + (' / dia' if daily else ''),
+        label='Completamente vacinadas' + (' / dia' if daily else ''),
         marker='o',
         markersize=1.5)
     plot_axhline(p, mode='max' if daily else 'latest')
 
-    y = data['doses2' + ('_novas' if daily else '')]
+    y = data['pessoas_vacinadas_parcialmente' + ('_novas' if daily else '')]
     p = plt.plot(
         data[COL_DATE],
         y,
-        label='Vacinas (2ª dose)' + (' / dia' if daily else ''),
+        label='Parcialmente vacinadas' + (' / dia' if daily else ''),
         marker='o',
         markersize=1.5)
     plot_axhline(p, mode='max' if daily else 'latest')
 
-    y = data['doses' + ('_novas' if daily else '')]
+    y = data['pessoas_inoculadas' + ('_novas' if daily else '')]
     p = plt.plot(
         data[COL_DATE],
         y,
         color='#000000',
-        label='Vacinas (total)' + (' / dia' if daily else ''),
+        label='Inoculações' + (' / dia' if daily else ''),
         marker='o',
         markersize=1.5)
     plot_axhline(p, mode='max' if daily else 'latest')

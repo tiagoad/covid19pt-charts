@@ -849,7 +849,7 @@ def plot_init(daily=False, nogrid=False, tick_left=False):
 
     if not daily:
         days = mdates.DayLocator()
-        weeks = mdates.WeekdayLocator(byweekday=MO)
+        weeks = mdates.WeekdayLocator(byweekday=MO, interval=2)
         week_fmt = mdates.DateFormatter('%d/%m')
         ax.xaxis.set_major_locator(weeks)
         ax.xaxis.set_major_formatter(week_fmt)

@@ -136,6 +136,10 @@ def main():
     print('hospital.png')
     plot_hospital(data)
     plt.savefig('output/hospital.png')
+    
+    print('hospital_90d.png')
+    plot_hospital(data, -90)
+    plt.savefig('output/hospital_90d.png')
 
     print('active.png')
     plot_active(data)
@@ -509,15 +513,15 @@ def plot_deaths_age(data):
     plot_footer()
 
 
-def plot_hospital(data):
+def plot_hospital(data, first_row=0):
 
     last_date = data[COL_DATE].iloc[-1]
 
-    x = data[COL_DATE]
+    x = data[COL_DATE][first_row:]
 
     fig, ax = plot_init()
 
-    y = data['internados_enfermaria']
+    y = data['internados_enfermaria'][first_row:]
     p = plt.plot(
         x,
         y,
@@ -527,7 +531,7 @@ def plot_hospital(data):
         markersize=1.5)
     plot_axhline(p)
 
-    y = data['internados_uci']
+    y = data['internados_uci'][first_row:]
     p = plt.plot(
         x,
         y,

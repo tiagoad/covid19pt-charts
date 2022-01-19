@@ -581,7 +581,7 @@ def plot_active(data):
 
 def plot_vaccines(data, daily=False):
     # remove nan rows
-    data = data.dropna(subset=['vacinas'])
+    data = data.dropna(subset=['vacinas', 'pessoas_vacinadas_completamente', 'pessoas_vacinadas_parcialmente'])
 
     fig, ax = plot_init()
 

@@ -577,7 +577,7 @@ def plot_active(data):
 
 def plot_vaccines(data, daily=False):
     # remove nan rows
-    data = data.dropna(subset=['doses'])
+    #data = data.dropna(subset=['doses'])
 
     fig, ax = plot_init()
 
@@ -587,7 +587,7 @@ def plot_vaccines(data, daily=False):
     p = plt.plot(
         data[COL_DATE],
         y,
-        label='Completamente vacinadas' + (' / dia' if daily else ''),
+        label='Completamente vacinados' + (' / dia' if daily else ''),
         marker='o',
         markersize=1.5)
     plot_axhline(p, mode='max' if daily else 'latest')
@@ -596,17 +596,17 @@ def plot_vaccines(data, daily=False):
     p = plt.plot(
         data[COL_DATE],
         y,
-        label='Parcialmente vacinadas' + (' / dia' if daily else ''),
+        label='Parcialmente vacinados' + (' / dia' if daily else ''),
         marker='o',
         markersize=1.5)
     plot_axhline(p, mode='max' if daily else 'latest')
 
-    y = data['pessoas_inoculadas' + ('_novas' if daily else '')]
+    y = data['vacinas' + ('_novas' if daily else '')]
     p = plt.plot(
         data[COL_DATE],
         y,
         color='#000000',
-        label='Inoculações' + (' / dia' if daily else ''),
+        label='Vacinas' + (' / dia' if daily else ''),
         marker='o',
         markersize=1.5)
     plot_axhline(p, mode='max' if daily else 'latest')

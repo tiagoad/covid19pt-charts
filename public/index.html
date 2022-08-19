@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>#COVID19PT - Gráficos</title>
+    <style type="text/css">
+      html,
+      body {
+        background: #ddd;
+        font-family: Helvetica, Arial, sans-serif;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        box-sizing: border-box;
+      }
+
+      header {
+        background-color: navy;
+        color: white;
+
+        max-width: 800px;
+        padding: 1px 3em;
+        margin: 0 auto;
+      }
+
+      main {
+        background-color: #fff;
+
+        max-width: 800px;
+        padding: 1.5em 3em 1px 3em;
+        margin: 0 auto;
+      }
+
+      img {
+        width: 100%;
+        border: 1px solid black;
+        filter: drop-shadow(0px 0px 2px #888);
+        margin: 0 0 2em 0;
+      }
+
+      hr {
+        border: 1px solid #ddd;
+        margin: 2em 0;
+      }
+
+      h2, h3, h4, h5, h6 {
+        color: navy;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>COVID19 em gráficos - Portugal</h1>
+    </header>
+    <main id="container">
+      <p>
+        Esta página contém alguns gráficos que acho interessantes, gerados a
+        partir dos
+        <a href="https://github.com/dssg-pt/covid19pt-data">dados da DSSG-PT</a
+        >, recolhidos manualmente pela Data Science for Good dos relatórios da
+        DGS.
+      </p>
+
+      <p>
+        O código está disponível em
+        <a href="https://github.com/tiagoad/covid19pt-charts"
+          >https://github.com/tiagoad/covid19pt-charts</a
+        >.
+      </p>
+
+      <p>
+        Alguns gráficos dependem de dados que já não são actualizados, estes gráficos a vermelho, no canto inferior esquerdo.
+      </p>
+
+      <p>
+        Por qualquer motivo, contactem-me por email:
+        <a href="mailto:tiago@tdias.tech">tiago@tdias.pt</a>
+      </p>
+
+      <hr />
+
+      <h2>Novos confirmados</h2>
+      <img src="output/newcases_national.png" />
+      <img src="output/newcases.png" />
+      <img src="output/newcases_90d.png" />
+      
+
+      <h2>Novos óbitos</h2>
+      <img src="output/newdeaths_national.png" />
+      <img src="output/newdeaths.png" />
+      <img src="output/newdeaths_90d.png" />
+
+      <h2>Hospitalizações</h2>
+      <img src="output/hospital.png" />
+      <img src="output/hospital_90d.png" />
+
+      <hr />
+
+      <h2>Gráficos estáticos</h2>
+
+      <p>Os gráficos seguintes dependem de dados que deixaram de ser disponibilizados pela DGS.</p>
+
+      <h3>Vacinas</h3>
+      <img src="output/vaccines.png" />
+      <img src="output/vaccines_daily.png" />
+
+      <h3>Testes</h3>
+      <img src="output/tests.png" />
+      <img src="output/newcases_percent.png" />
+
+      <h3>Sexos</h3>
+      <img src="output/newcases_genders.png" />
+      <img src="output/newdeaths_genders.png" />
+
+      <h3>Faixa etária</h3>
+      <img src="output/newcases_age.png" />
+      <img src="output/age_heatmap_cases.png" />
+      <img src="output/newdeaths_age.png" />
+      <img src="output/age_heatmap_deaths.png" />
+
+      <h3>Casos ativos</h3>
+      <img src="output/active.png" />
+
+      <hr />
+
+      <script
+        src="https://utteranc.es/client.js"
+        repo="tiagoad/covid19pt-charts"
+        issue-term="pathname"
+        label="Comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async
+      ></script>
+    </main>
+  </body>
+</html>

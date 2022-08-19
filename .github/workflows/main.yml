@@ -61,12 +61,14 @@ jobs:
 
       - name: Generate csv
         run: poetry run python heatmap.py
+
+      - name: Move outputs
+        run: mv output public/output
           
       - name: Deploy to Github Pages
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+        uses: JamesIves/github-pages-deploy-action@v4.4.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: http
-          FOLDER: output
-          TARGET_FOLDER: output
-          CLEAN: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: http
+          folder: public
+          clean: true

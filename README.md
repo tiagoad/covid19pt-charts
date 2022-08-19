@@ -9,3 +9,5 @@ To clone/update the data, run `./update-data.sh`.
 Run `poetry shell` to enter a virtualenv shell, and run `python chart.py` to generate the charts in your project directory as PNG pictures. Alternatively, run `poetry run python ./chart.py`)
 
 This script is really not well written nor production code. I did this on a few weekends seeking just some nice charts. Hope you like them.
+
+The `http` branch is getting pretty heavy. Use `git clone -b master --single-branch` to clone only the code.

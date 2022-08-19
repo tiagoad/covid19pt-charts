@@ -8,8 +8,9 @@ import os
 from datetime import datetime
 
 DATA_FILE = 'vendor/dssg_data.csv'
-SAMPLES_FILE = 'vendor/dssg_samples.csv'
-VACCINES_FILE = 'vendor/dssg_vaccines.csv'
+SAMPLES_FILE = 'vendor/dssg_amostras.csv'
+VACCINES_FILE = 'vendor/dssg_vacinas.csv'
+DAILY_FILE = 'vendor/dssg_dados_diarios.csv'
 META_FILE = 'data/regions.txt'
 GROUPS_FILE = 'data/groups.txt'
 
@@ -71,115 +72,139 @@ def main():
 
     print('Loading data')
     data = load_data()
-    print('Processing new cases')
 
-    data = new(data, COL_REGION_CONFIRMED + COL_REGION_DEATHS + COL_AGE + ['obitos', 'n_confirmados', 'recuperados', 'internados', 'internados_uci'])
+    data_old = data[data['confirmados'].notna()]
+    data_new = data[data['confirmados_daily'].notna()];
 
     print('Plotting charts')
 
     print('newcases_genders.png')
-    plot_genders(data, mode='cases')
+    plot_genders(data_old, mode='cases')
     plt.savefig('output/newcases_genders.png')
+    plt.close()
 
     print('newdeaths_genders.png')
-    plot_genders(data, mode='deaths')
+    plot_genders(data_old, mode='deaths')
     plt.savefig('output/newdeaths_genders.png')
+    plt.close()
 
     print('newcases.png')
-    plot_confirmed(data)
+    plot_confirmed(data_old)
     plt.savefig('output/newcases.png')
+    plt.close()
 
     print('newcases_90d.png')
-    plot_confirmed(data, -90)
+    plot_confirmed(data_old, -90)
     plt.savefig('output/newcases_90d.png')
+    plt.close()
 
     print('newcases_noroll.png')
-    plot_confirmed(data, rolling=False)
+    plot_confirmed(data_old, rolling=False)
     plt.savefig('output/newcases_90d_noroll.png')
+    plt.close()
 
     print('newcases_90d_noroll.png')
-    plot_confirmed(data, -90, rolling=False)
+    plot_confirmed(data_old, -90, rolling=False)
     plt.savefig('output/newcases_90d_noroll.png')
+    plt.close()
 
     print('newdeaths.png')
-    plot_deaths(data)
+    plot_deaths(data_old)
     plt.savefig('output/newdeaths.png')
+    plt.close()
 
     print('newdeaths_90d.png')
-    plot_deaths(data, -90)
+    plot_deaths(data_old, -90)
     plt.savefig('output/newdeaths_90d.png')
+    plt.close()
 
     print('newdeaths_90d_noroll.png')
-    plot_deaths(data, -90, rolling=False)
+    plot_deaths(data_old, -90, rolling=False)
     plt.savefig('output/newdeaths_90d_noroll.png')
+    plt.close()
 
     print('national.png')
-    plot_global(data)
+    plot_global(data_old)
     plt.savefig('output/national.png')
+    plt.close()
 
     print('newcases_percent.png')
-    plot_confirmed_percent(data)
+    plot_confirmed_percent(data_old)
     plt.savefig('output/newcases_percent.png')
+    plt.close()
 
     print('newcases_percent_noroll.png')
-    plot_confirmed_percent(data, rolling=False)
+    plot_confirmed_percent(data_old, rolling=False)
     plt.savefig('output/newcases_percent_noroll.png')
+    plt.close()
 
     print('newcases_age.png')
-    plot_confirmed_ages(data)
+    plot_confirmed_ages(data_old)
     plt.savefig('output/newcases_age.png')
+    plt.close()
 
     print('newdeaths_age.png')
-    plot_deaths_age(data)
+    plot_deaths_age(data_old)
     plt.savefig('output/newdeaths_age.png')
+    plt.close()
 
     print('hospital.png')
-    plot_hospital(data)
+    plot_hospital(data_old)
     plt.savefig('output/hospital.png')
+    plt.close()
     
     print('hospital_90d.png')
-    plot_hospital(data, -90)
+    plot_hospital(data_old, -90)
     plt.savefig('output/hospital_90d.png')
+    plt.close()
 
     print('active.png')
-    plot_active(data)
+    plot_active(data_old)
     plt.savefig('output/active.png')
+    plt.close()
 
     print('tests.png')
-    plot_tests(data)
+    plot_tests(data_old)
     plt.savefig('output/tests.png')
+    plt.close()
 
     print('vaccines.png')
-    plot_vaccines(data)
+    plot_vaccines(data_old)
     plt.savefig('output/vaccines.png')
+    plt.close()
 
     print('vaccines_daily.png')
-    plot_vaccines(data, daily=True)
+    plot_vaccines(data_old, daily=True)
     plt.savefig('output/vaccines_daily.png')
+    plt.close()
 
     print('age_heatmap_cases.png')
-    plot_age_heatmap(data, mode='cases')
+    plot_age_heatmap(data_old, mode='cases')
     plt.savefig('output/age_heatmap_cases.png')
+    plt.close()
 
     print('age_heatmap_deaths.png')
-    plot_age_heatmap(data, mode='deaths')
+    plot_age_heatmap(data_old, mode='deaths')
     plt.savefig('output/age_heatmap_deaths.png')
+    plt.close()
 
     print('newdeaths_national.png')
-    plot_national(data, mode='deaths')
+    plot_national(data_new, mode='deaths')
     plt.savefig('output/newdeaths_national.png')
+    plt.close()
 
     print('newcases_national.png')
-    plot_national(data, mode='cases')
+    plot_national(data_new, mode='cases')
     plt.savefig('output/newcases_national.png')
-
-
+    plt.close()
 
 def plot_confirmed(data, first_row=0, rolling=True):
     x = data[COL_DATE]
     fig, ax = plot_init()
 
     last_date = data[COL_DATE].iloc[-1]
+
+    data = data.dropna(subset=['confirmados_arslvt'])
 
     for col, label in REGION_COLUMNS.items():
         key = 'new_confirmados_' + col
@@ -305,6 +330,8 @@ def plot_deaths(data, first_row=0, rolling=True):
     plot_footer()
 
 def plot_global(data, first_row=0):
+    #data = data.dropna(subset=['recuperados', 'confirmados', 'obitos'])
+
     x = data[COL_DATE]
 
     fig, ax1 = plot_init()
@@ -353,7 +380,7 @@ def plot_global(data, first_row=0):
     # Recuperados
     ax4.spines["right"].set_position(("outward", 90))
     ax4.spines["right"].set_color('#00ff00')
-    confirmed = ax3.plot(
+    recovered = ax3.plot(
         x[first_row:],
         data['recuperados']
             .div(TOTAL_POP)
@@ -366,7 +393,7 @@ def plot_global(data, first_row=0):
         markersize=1.5)
 
     # legend
-    lns = deaths + confirmed
+    lns = deaths + confirmed + recovered
     labs = [l.get_label() for l in lns]
     ax1.legend(lns, labs, loc='upper left')
 
@@ -407,6 +434,8 @@ def plot_combined(data):
 
 
 def plot_confirmed_percent(data, first_row=0, rolling=True):
+    data = data.dropna(subset=['confirmados_novos', 'amostras_pcr_novas'])
+
     last_date = data[COL_DATE].iloc[-1]
 
     x = data[COL_DATE]
@@ -438,9 +467,10 @@ def plot_confirmed_percent(data, first_row=0, rolling=True):
 
     plt.legend(loc='upper left')
 
-    plot_footer()
+    plot_footer(frozen=True)
 
 def plot_confirmed_ages(data):
+    data = data.dropna(subset=['confirmados_0_9_f'])
 
     last_date = data[COL_DATE].iloc[-1]
 
@@ -474,9 +504,10 @@ def plot_confirmed_ages(data):
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
-    plot_footer()
+    plot_footer(frozen=True)
 
 def plot_deaths_age(data):
+    data = data.dropna(subset=['obitos_0_9_f'])
 
     last_date = data[COL_DATE].iloc[-1]
 
@@ -510,10 +541,11 @@ def plot_deaths_age(data):
     title += last_date.strftime('%Y-%m-%d')
     plt.title(title, loc='left')
 
-    plot_footer()
+    plot_footer(frozen=True)
 
 
 def plot_hospital(data, first_row=0):
+    data = data.dropna(subset=['internados_enfermaria', 'internados_uci'])
 
     last_date = data[COL_DATE].iloc[-1]
 
@@ -553,6 +585,7 @@ def plot_hospital(data, first_row=0):
 
 
 def plot_active(data):
+    data = data.dropna(subset=['ativos'])
 
     last_date = data[COL_DATE].iloc[-1]
 
@@ -576,11 +609,10 @@ def plot_active(data):
 
     plt.legend(loc='upper left')
 
-    plot_footer()
+    plot_footer(frozen=True)
 
 
 def plot_vaccines(data, daily=False):
-    # remove nan rows
     data = data.dropna(subset=['vacinas', 'pessoas_vacinadas_completamente', 'pessoas_vacinadas_parcialmente'])
 
     fig, ax = plot_init()
@@ -621,7 +653,7 @@ def plot_vaccines(data, daily=False):
 
     plt.legend(loc='upper left')
 
-    plot_footer(top=True)
+    plot_footer(top=True, frozen=True)
 
 
 def plot_age_heatmap(data, mode='cases'):
@@ -691,10 +723,11 @@ def plot_age_heatmap(data, mode='cases'):
     title = r'$\bf{' + 'COVID19\\ Portugal' + '}$ | ' + title + ' por semana, por faixa etária (última semana ajustada)'
     plt.title(title, loc='left')
 
-    plot_footer(zero_origin=False)
+    plot_footer(zero_origin=False, frozen=True)
 
 
 def plot_tests(data):
+    data = data.dropna(subset=['amostras_pcr_novas'])
 
     last_date = data[COL_DATE].iloc[-1]
 
@@ -740,24 +773,26 @@ def plot_tests(data):
 
     plt.legend(loc='upper left')
 
-    plot_footer()
+    plot_footer(frozen=True)
 
 
 def plot_national(data, mode):
     if mode == 'cases':
-        column = 'confirmados_novos'
+        column = 'confirmados_novos_daily'
         title = 'Novos casos confirmados'
     elif mode == 'deaths':
-        column = 'new_obitos'
+        column = 'obitos_novos_daily'
         title = 'Novos óbitos'
     else:
         return
 
+    data = data.dropna(subset=[column])
+
     fig, ax = plot_init()
 
-    last_date = data[COL_DATE].iloc[-1]
+    last_date = data['data'].iloc[-1]
 
-    x = data[COL_DATE]
+    x = data['data']
     y = data[column]
 
     p = plt.plot(
@@ -779,6 +814,8 @@ def plot_national(data, mode):
 
 
 def plot_genders(data, mode='cases'):
+    data = data.dropna(subset=['confirmados_f'])
+
     if mode == 'cases':
         column = 'new_confirmados'
         title = 'Novos casos confirmados'
@@ -828,7 +865,7 @@ def plot_genders(data, mode='cases'):
 
     plt.legend(loc='upper left')
 
-    plot_footer(top=True)
+    plot_footer(top=True, frozen=True)
 
 #####
 
@@ -873,13 +910,16 @@ def plot_init(daily=False, nogrid=False, tick_left=False):
     return fig, ax
 
 
-def plot_footer(top=False, zero_origin=True):
+def plot_footer(top=False, zero_origin=True, frozen=False):
     if top:
         x, y = 0.985, 0.975
     else:
         x, y = 0.985, 0.023
 
     plt.figtext(x, y, 'https://covid19.tdias.pt', horizontalalignment='right', verticalalignment='center', color='#BBBBBB')
+
+    if frozen:
+        plt.figtext(0.005, 0.023, "[dados antigos]", horizontalalignment='left', verticalalignment='center', color='#c90a00', fontsize='x-small')
 
     if zero_origin:
         plt.gca().set_ylim(bottom=0)
@@ -891,16 +931,30 @@ def load_data():
     data_main = pd.read_csv(DATA_FILE)
     samples = pd.read_csv(SAMPLES_FILE)
     vaccines = pd.read_csv(VACCINES_FILE)
+    daily = pd.read_csv(DAILY_FILE)
+
 
     # change OWID vaccines date format to DD-MM-YYYY (like DSSG)
     # vaccines['date'] = pd.to_datetime(vaccines["date"], format='%Y-%m-%d').dt.strftime('%d-%m-%Y')
     # data = pd.merge(data, vaccines, how='left', left_on='data', right_on='date')
 
     data = data_main
-    data = pd.merge(data, samples, how='left', left_on='data', right_on='data')
-    data = pd.merge(data, vaccines, how='left', left_on='data', right_on='data')
+    data = new(data, COL_REGION_CONFIRMED + COL_REGION_DEATHS + COL_AGE + ['obitos', 'recuperados', 'internados', 'internados_uci'])
 
+    data = pd.merge(data, samples, how='outer', left_on='data', right_on='data')
+    data = pd.merge(data, vaccines, how='outer', left_on='data', right_on='data')
     data[COL_DATE] = pd.to_datetime(data_main[COL_DATE], format='%d-%m-%Y %H:%M')
+    data['data'] = pd.to_datetime(data['data'], format='%d-%m-%Y')
+    data.sort_values(by=['data'], inplace=True)
+    
+    daily['data'] = pd.to_datetime(daily['data'], format='%Y-%m-%d')
+    daily.sort_values(by=['data'], inplace=True)
+    daily = daily.add_suffix('_daily')
+    daily.rename(columns=dict(data_daily='data'), inplace=True)
+    data = pd.merge(data, daily, how='outer', left_on='data', right_on='data')
+
+    data.sort_values(by=['data'], inplace=True)
+    data.to_csv('output.csv')
 
     return data
 
